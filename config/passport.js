@@ -81,4 +81,32 @@ var localSignupStrategy = function(req, email, password, done) {
 
 };
 
+var localSigninStrategy = function(req, email, password, done) {
+    if (email)
+        email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
+
+    // asynchronous
+    process.nextTick(function() {
+        User.findOne({ 'email' :  email }, function(err, user) {
+            // if there are any errors, return the error
+            if (err)
+                return done(err);
+
+            // if no user is found, return the message
+            if (!user)
+                return done(null, false);
+
+                bcrypt.compare(password, user.password, (err, res) =>{
+                    if(res){
+                        return done(null, user);
+                    }else{
+                        return done(null, false);
+                    }
+                });    
+        });
+    });
+
+};
+
 module.exports.localSignupStrategy = localSignupStrategy;
+module.exports.localSiginStrategy = localSigninStrategy;
