@@ -7,7 +7,8 @@ var expressSession   = require("express-session"),
       LocalStrategy  = require("passport-local"),
       mongoose       = require("mongoose"),
       bcrypt         = require("bcryptjs"),
-      passportStrategy = require("./config/passport");
+      passportStrategy = require("./config/passport"),
+      middleware     = require("./middleware/index");
 
 var app = express();
 
@@ -72,8 +73,8 @@ app.get("/users/login", (req, res)=>{
     res.render("login");
 });
 
-app.post("/users/login",passport.authenticate('local-login'), (req, res) =>{
-    res.redirect("/users/"+ req.user._id);
+app.post("/users/login",passport.authenticate('local-login', {failureRedirect : '/users/register'}), (req, res) =>{
+   res.redirect("/users/@me");
 });
 
 //Register Routes
@@ -83,7 +84,7 @@ app.get("/users/register", (req, res)=>{
 
 app.post("/users/register",passport.authenticate('local-signup', {
     successRedirect : '/', // redirect to the secure profile section
-    failureRedirect : '/register', // redirect back to the signup page if there is an error
+    failureRedirect : '/users/register', // redirect back to the signup page if there is an error
 }), (req, res) =>{
     console.log("User Registered");
 });
@@ -95,8 +96,8 @@ app.get("/users/logout", (req, res) =>{
 
 
 //Users Profile
-app.get("/users/:id", (req, res)=>{
-    User.findById(req.params.id).then((rUser)=>{
+app.get("/users/@me",middleware.isLogedIn, (req, res)=>{
+    User.findById(req.user._id).then((rUser)=>{
         res.send(rUser);
     }).catch((e)=>{
         res.send(e);
