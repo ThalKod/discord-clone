@@ -84,9 +84,13 @@ app.get("/users/register", (req, res)=>{
 app.post("/users/register",passport.authenticate('local-signup', {
     successRedirect : '/', // redirect to the secure profile section
     failureRedirect : '/register', // redirect back to the signup page if there is an error
-    failureFlash : true // allow flash messages
 }), (req, res) =>{
     console.log("User Registered");
+});
+
+app.get("/users/logout", (req, res) =>{
+    req.logout();
+    res.redirect("/");
 });
 
 
