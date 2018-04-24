@@ -4,10 +4,15 @@ var   mongoose  = require("mongoose"),
       _         = require("lodash");
 
 var userSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        unique: true
+    },
     email:{
         type: String,
         required: true,
         minlength: 1,
+        unique: true,
         trim: true,
         validate:{
             validator: (value) =>{

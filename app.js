@@ -10,7 +10,10 @@ var expressSession   = require("express-session"),
       passportStrategy = require("./config/passport"),
       middleware     = require("./middleware/index"),
       socketIO       = require("socket.io"),
-      http           = require("http");
+      http           = require("http"),
+      indexRoute     = require("./routes/index"),
+      userRoute      = require("./routes/user"),
+      channelRoute   = require("./routes/channel");
 
 var app = express();
 var server = http.createServer(app);
@@ -76,61 +79,15 @@ io.on("connection", (socket)=>{
         callback();
     });
 
-
+ 
     socket.on("disconnect", ()=>{
         console.log("Diconected");
     })
 });
-//=========== Routes ===================
-app.get("/", (req, res)=>{
-    res.render("index");
-});
 
-//Login Routes
-app.get("/users/login", (req, res)=>{
-    res.render("login");
-});
-
-app.post("/users/login",passport.authenticate('local-login', {failureRedirect : '/users/register'}), (req, res) =>{
-   res.redirect("/users/@me");
-});
-
-//Register Routes
-app.get("/users/register", (req, res)=>{
-    res.render("register");
-});
-
-app.post("/users/register",passport.authenticate('local-signup', {
-    successRedirect : '/', // redirect to the secure profile section
-    failureRedirect : '/users/register', // redirect back to the signup page if there is an error
-}), (req, res) =>{
-    console.log("User Registered");
-});
-
-app.get("/users/logout", (req, res) =>{
-    req.logout();
-    res.redirect("/");
-});
-
-
-//Users Profile
-app.get("/users/@me",middleware.isLogedIn, (req, res)=>{
-    User.findById(req.user._id).then((rUser)=>{
-        res.send(rUser);
-    }).catch((e)=>{
-        res.send(e);
-    });
-});
-
-app.get("/channel/:id",middleware.isLogedIn, (req, res)=>{
-    User.findById(req.user._id).then((rUser)=>{
-        res.render("chat", {userID: rUser._id});
-    }).catch((e)=>{
-        console.log(e);
-        res.redirect("/");
-    });
-    
-});
+app.use("/", indexRoute);
+app.use("/users", userRoute);
+app.use("/channel", channelRoute);
 
 
 server.listen(5000, ()=>{
