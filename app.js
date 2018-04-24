@@ -18,6 +18,7 @@ var expressSession   = require("express-session"),
 var app = express();
 var server = http.createServer(app);
 var io = socketIO(server);
+require("./io/index")(io);
 
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -66,23 +67,6 @@ passport.deserializeUser(function(id, done) {
     User.findById(id, function(err, user) {
         done(err, user);
     });
-});
-
-//==========  IO   ===================
-io.on("connection", (socket)=>{
-    console.log("New User Connected");
-
-    socket.on("createdMessage", (data, callback) =>{
-        console.log(data);
-        
-        io.emit("newMessage", data.message);
-        callback();
-    });
-
- 
-    socket.on("disconnect", ()=>{
-        console.log("Diconected");
-    })
 });
 
 app.use("/", indexRoute);
