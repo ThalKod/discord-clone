@@ -104,6 +104,9 @@ app.get("/users/@me",middleware.isLogedIn, (req, res)=>{
     });
 });
 
+app.get("/channel/:id", (req, res)=>{
+    res.render("chat");
+});
 
 
 app.listen(config.port, ()=>{
