@@ -30,15 +30,15 @@ var userSchema = new mongoose.Schema({
 
 //userSchema.plugin(passportLocalMongoose);
 
-// Generating a hash
-userSchema.methods.generateHash = function(password) {
-    // return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-    bcrypt.genSalt(10, (err, salt) =>{
-        bcrypt.hash(password, salt, (err, res) =>{
-            return res;
-        });
-    });
-};
+// // Generating a hash
+// userSchema.methods.generateHash = function(password) {
+//     // return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+//     bcrypt.genSalt(10, (err, salt) =>{
+//         bcrypt.hash(password, salt, (err, res) =>{
+//             return res;
+//         });
+//     });
+// };
 
 userSchema.methods.toJSON = function(){
     var user = this;
