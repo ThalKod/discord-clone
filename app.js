@@ -8,11 +8,15 @@ var expressSession   = require("express-session"),
       mongoose       = require("mongoose"),
       bcrypt         = require("bcryptjs"),
       passportStrategy = require("./config/passport"),
-      middleware     = require("./middleware/index");
+      middleware     = require("./middleware/index"),
+      socketIO       = require("socket.io"),
+      http           = require("http");
 
 var app = express();
+var server = http.createServer(app);
+var io = socketIO(server);
 
-app.use(express.static(__dirname + "public"));
+app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
@@ -61,8 +65,22 @@ passport.deserializeUser(function(id, done) {
     });
 });
 
+//==========  IO   ===================
+io.on("connection", (socket)=>{
+    console.log("New User Connected");
+
+    socket.on("createdMessage", (data, callback) =>{
+        console.log(data);
+        
+        io.emit("newMessage", data.message);
+        callback();
+    });
 
 
+    socket.on("disconnect", ()=>{
+        console.log("Diconected");
+    })
+});
 //=========== Routes ===================
 app.get("/", (req, res)=>{
     res.render("index");
@@ -104,11 +122,17 @@ app.get("/users/@me",middleware.isLogedIn, (req, res)=>{
     });
 });
 
-app.get("/channel/:id", (req, res)=>{
-    res.render("chat");
+app.get("/channel/:id",middleware.isLogedIn, (req, res)=>{
+    User.findById(req.user._id).then((rUser)=>{
+        res.render("chat", {userID: rUser._id});
+    }).catch((e)=>{
+        console.log(e);
+        res.redirect("/");
+    });
+    
 });
 
 
-app.listen(config.port, ()=>{
-    console.log("Server Listening at " + config.port);
+server.listen(5000, ()=>{
+    console.log("listenning on 5000");
 });

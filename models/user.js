@@ -1,6 +1,7 @@
 var   mongoose  = require("mongoose"),
       validator = require("validator"),
-      bcrypt    = require("bcryptjs");
+      bcrypt    = require("bcryptjs"),
+      _         = require("lodash");
 
 var userSchema = new mongoose.Schema({
     email:{
@@ -33,5 +34,12 @@ userSchema.methods.generateHash = function(password) {
         });
     });
 };
+
+userSchema.methods.toJSON = function(){
+    var user = this;
+    var userObj = user.toObject();
+    return _.pick(userObj, ["_id"]);
+}
+
 
 module.exports = mongoose.model("User", userSchema);
