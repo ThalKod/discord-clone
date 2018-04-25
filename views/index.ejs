@@ -8,7 +8,13 @@
     </head>
     <body>
         <h1>Welcome to Minicord</h1>
-        <button><a href="/users/login">Sign In</a></button>
-        <button><a href="/users/register">Sign Up</a></button>
+        <% if(!currentUser){ %>
+            <button><a href="/users/login">Sign In</a></button>
+            <button><a href="/users/register">Sign Up</a></button>
+        <% }else{ %>
+            <p>Hi, <%= currentUser.username %></p>
+            <button><a href="/users/logout">Logout</a></button>
+        <% } %>
+        
     </body>
 </html>

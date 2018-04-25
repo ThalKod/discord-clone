@@ -6,7 +6,16 @@ var express     = require("express"),
 var router = express.Router();
  
 router.get("/", (req, res)=>{
-    res.render("index");
+    if(req.user){
+        User.findById(req.user._id).then((rUser)=>{
+            return res.render("index");
+        }).catch((e)=>{
+            console.log(e);
+            return res.render("index");
+        });
+    }else{
+        res.render("index");
+    }
 });
 
 
