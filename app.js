@@ -13,7 +13,8 @@ const expressSession   = require("express-session"),
       http           = require("http"),
       indexRoute     = require("./routes/index"),
       userRoute      = require("./routes/user"),
-      channelRoute   = require("./routes/channel");
+      channelRoute   = require("./routes/channel"),
+      methodOverride = require("method-override");
 
 var app = express();
 var server = http.createServer(app);
@@ -22,7 +23,9 @@ require("./io/index")(io);
 
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
+
 
 //Mongoose config
 mongoose.connect(config.dbURL, function(err){
