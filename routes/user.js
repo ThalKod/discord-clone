@@ -33,7 +33,7 @@ router.get("/logout", (req, res) =>{
 //Users Profile
 router.get("/@me",middleware.isLogedIn, (req, res)=>{
     User.findById(req.user._id).then((rUser)=>{
-        res.send(rUser);
+        res.render("profile", {name: rUser.username, email: rUser.email});
     }).catch((e)=>{
         res.send(e);
     });

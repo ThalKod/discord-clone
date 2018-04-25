@@ -1,4 +1,4 @@
-var expressSession   = require("express-session"),
+const expressSession   = require("express-session"),
       User           = require("./models/user"),
       bodyParser     = require("body-parser"),
       express        = require("express"),
