@@ -9,7 +9,7 @@
     <body>
         <a href="/">Home</a>
         <h1>User Profile</h1>
-        <% if(currentUser.name){ %>
+        <% if(!currentUser.username){ %>
             <p><b>Name: </b> <i>No Username</i></p>
         <% }else{ %>
             <p><b>Name: </b> <%= currentUser.username %></p>
