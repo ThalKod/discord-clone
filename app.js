@@ -14,7 +14,8 @@ const expressSession   = require("express-session"),
       indexRoute     = require("./routes/index"),
       userRoute      = require("./routes/user"),
       channelRoute   = require("./routes/channel"),
-      methodOverride = require("method-override");
+      methodOverride = require("method-override"),
+      seedDB         = require("./playground/index");
 
 var app = express();
 var server = http.createServer(app);
@@ -34,6 +35,8 @@ mongoose.connect(config.dbURL, function(err){
     }
 });
 mongoose.Promise = global.Promise;
+
+//seedDB;
 
 //Passport configuration
 app.use((expressSession)({

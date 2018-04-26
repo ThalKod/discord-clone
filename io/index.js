@@ -1,7 +1,8 @@
 const mongoose = require("mongoose"),
       User     = require("../models/user"),
       {ObjectID} = require("mongodb"),
-      Message   = require("../models/message");
+      Message   = require("../models/message"),
+      Channel   = require("../models/channel");
 
 
 module.exports = (io)=>{
@@ -9,9 +10,7 @@ module.exports = (io)=>{
         console.log("New User Connected");
 
         socket.on("createdMessage", (data, callback) =>{
-            console.log(data);
             User.findById(ObjectID(data.userID)).then((rUser)=>{
-                console.log(rUser);
                 var msg = {
                     text: data.message,
                     author:{
@@ -21,6 +20,13 @@ module.exports = (io)=>{
                 };
                 Message.create(msg).then((rMsg)=>{ 
                     console.log(rMsg);
+                    Channel.findByIdAndUpdate(ObjectID(data.channelID),).then((rChannel)=>{
+                        rChannel.message.push(rMsg);
+                        rChannel.save();
+                        console.log(rChannel);
+                    }).catch((e)=>{
+                        console.log(e);
+                    });
                 }).catch((e)=>{
                     console.log(e);
                 });

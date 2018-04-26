@@ -11,7 +11,7 @@ socket.on("connect", function(){
         
         var data = {
             userID,
-            channelID : "23",
+            channelID : channelID,
             message: messageTextBox.val()
         };
 
