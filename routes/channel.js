@@ -8,12 +8,8 @@ var express     = require("express"),
 var router = express.Router();
  
 router.get("/:id",middleware.isLogedIn, (req, res)=>{
-    User.findById(req.user._id).then((rUser)=>{
-        res.render("chat", {userID: rUser._id});
-    }).catch((e)=>{
-        console.log(e);
-        res.redirect("/");
-    });
+    
+    res.render("chat");
     
 });
 
