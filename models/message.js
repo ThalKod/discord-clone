@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 
-var messageSchema = mongoose.Schema({
+var messageSchema = new mongoose.Schema({
     text:{
         type: String
     },

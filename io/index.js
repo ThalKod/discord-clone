@@ -23,6 +23,7 @@ module.exports = (io)=>{
                     Channel.findByIdAndUpdate(ObjectID(data.channelID),).then((rChannel)=>{
                         rChannel.message.push(rMsg);
                         rChannel.save();
+                        io.emit("newMessage", msg);
                         console.log(rChannel);
                     }).catch((e)=>{
                         console.log(e);
@@ -35,7 +36,7 @@ module.exports = (io)=>{
                 console.log(e);
             });
             
-            io.emit("newMessage", data.message);
+            //io.emit("newMessage", data.message);
             callback();
         });
 

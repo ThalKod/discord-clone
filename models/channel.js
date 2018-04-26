@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 
-channelSchema = mongoose.Schema({
+channelSchema = new mongoose.Schema({
     message: [
         {
             type: mongoose.Schema.Types.ObjectId,

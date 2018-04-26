@@ -24,7 +24,7 @@ socket.on("connect", function(){
 socket.on("newMessage", function(message){
 
     var li = jQuery("<li></li>");
-    li.text(message);
+    li.html("<b>"+ message.author.name+"</b> "+message.text+"</i>");
 
     jQuery("#messages").append(li);
 });
