@@ -2,14 +2,14 @@ var mongoose = require("mongoose");
 
 var messageSchema = mongoose.Schema({
     text:{
-        type: string
+        type: String
     },
     author:{
         id:{
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
         },
-        name: string
+        name: String
     }
 });
 
