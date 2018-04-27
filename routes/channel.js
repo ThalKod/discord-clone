@@ -10,6 +10,19 @@ var express     = require("express"),
 
 
 var router = express.Router();
+
+router.post("/new",middleware.isLogedIn, (req, res)=>{
+    
+    var channel = {
+        creator: req.user._id
+    };
+    Channel.create(channel).then((rChannel)=>{
+        res.redirect("/channel/"+rChannel._id);
+    }).catch((e)=>{
+        console.log(e);
+        res.redirect("back");
+    })
+});
  
 router.get("/:id",middleware.isLogedIn, (req, res)=>{
     Channel.findById(ObjectID(req.params.id)).populate("message").then((rChannel)=>{
@@ -22,6 +35,8 @@ router.get("/:id",middleware.isLogedIn, (req, res)=>{
         console.log(e);
     });
 });
+
+
 
 
 module.exports = router;
