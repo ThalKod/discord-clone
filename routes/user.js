@@ -32,7 +32,7 @@ router.get("/logout", (req, res) =>{
 
 //Users Profile
 router.get("/@me",middleware.isLogedIn, (req, res)=>{
-    User.findById(req.user._id).then((rUser)=>{
+    User.findById(req.user._id).populate("channels").then((rUser)=>{
         res.render("profile");
     }).catch((e)=>{
         res.send(e);

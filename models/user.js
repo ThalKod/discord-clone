@@ -25,7 +25,11 @@ var userSchema = new mongoose.Schema({
         type: String,
         minlength: 6,
         required: true
-    }
+    },
+    channels:[ {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Channel"
+    }]
 });
 
 //userSchema.plugin(passportLocalMongoose);

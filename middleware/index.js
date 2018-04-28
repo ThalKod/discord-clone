@@ -1,4 +1,7 @@
-const User = require("../models/user");
+const User = require("../models/user"),
+      Channel = require("../models/channel"),
+      {ObjectID} = require("mongodb");
+
 
 var middleware = {};
 
@@ -9,6 +12,19 @@ middleware.isLogedIn = (req, res, next)=>{
         res.redirect("/users/login");
     }
 };
+
+middleware.isChannelParticipant = (req, res, next)=>{
+    Channel.findById(ObjectID(req.params.id)).then((rChannel)=>{
+        for(var i =0; i < rChannel.participant.length; i++){
+            //TODO: Checking if current USer ID is in participant list
+        }
+        next();
+        //res.redirect("/");
+    }).catch((e)=>{
+        console.log(e);
+        res.redirect("/");
+    });
+}
 
 // middleware.isItUserProfile = (req, res, next)=>{
 //     User.findById(req.params.id).then((rUser)=>{

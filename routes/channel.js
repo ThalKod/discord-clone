@@ -12,19 +12,29 @@ var express     = require("express"),
 var router = express.Router();
 
 router.post("/new",middleware.isLogedIn, (req, res)=>{
-    
     var channel = {
         creator: req.user._id
     };
-    Channel.create(channel).then((rChannel)=>{
-        res.redirect("/channel/"+rChannel._id);
-    }).catch((e)=>{
-        console.log(e);
-        res.redirect("back");
-    })
+
+    User.findById(req.user._id).then((rUser)=>{
+        Channel.create(channel).then((rChannel)=>{
+            
+            rUser.channels.push(rChannel._id);
+            rUser.save();
+
+            rChannel.participant.push(rUser._id);
+            rChannel.save();
+    
+            res.redirect("/channel/"+rChannel._id);
+        }).catch((e)=>{
+            console.log(e);
+            res.redirect("back");
+        })
+    });
+    
 });
 
-router.get("/:id",middleware.isLogedIn, (req, res)=>{
+router.get("/:id",middleware.isLogedIn, middleware.isChannelParticipant, (req, res)=>{
     Channel.findById(ObjectID(req.params.id)).populate("message").then((rChannel)=>{
         if(!rChannel){
             return res.redirect("/");
