@@ -3,21 +3,34 @@ var socket = io();
 socket.on("connect", function(){
     console.log("Connected");
 
+    var params = {
+        channelID : channelID
+    };
 
-    jQuery("#message-form").on("submit", function(e){
-        e.preventDefault();
+    socket.emit("join", params, function(err){
+        if(err){
+            alert(err);
+            window.location.href = '/';
+        }else{
+            console.log("No Error");
+        }
+    });
+    
+});
 
-        var messageTextBox =  jQuery("[name=message]");
-        
-        var data = {
-            userID,
-            channelID : channelID,
-            message: messageTextBox.val()
-        };
+jQuery("#message-form").on("submit", function(e){
+    e.preventDefault();
 
-        socket.emit('createdMessage', data, function(){
-            messageTextBox.val(" ");
-        });
+    var messageTextBox =  jQuery("[name=message]");
+    
+    var data = {
+        userID,
+        channelID : channelID,
+        message: messageTextBox.val()
+    };
+
+    socket.emit('createdMessage', data, function(){
+        messageTextBox.val(" ");
     });
 });
 

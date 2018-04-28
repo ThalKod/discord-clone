@@ -23,7 +23,7 @@ router.post("/new",middleware.isLogedIn, (req, res)=>{
         res.redirect("back");
     })
 });
- 
+
 router.get("/:id",middleware.isLogedIn, (req, res)=>{
     Channel.findById(ObjectID(req.params.id)).populate("message").then((rChannel)=>{
         if(!rChannel){
@@ -35,8 +35,6 @@ router.get("/:id",middleware.isLogedIn, (req, res)=>{
         console.log(e);
     });
 });
-
-
 
 
 module.exports = router;

@@ -9,6 +9,12 @@ module.exports = (io)=>{
         io.on("connection", (socket)=>{
         console.log("New User Connected");
 
+
+        socket.on("join", (params, callback)=>{
+            socket.join(params.channelID);
+            callback();
+        });
+
         socket.on("createdMessage", (data, callback) =>{
             User.findById(ObjectID(data.userID)).then((rUser)=>{
                 var msg = {
@@ -23,7 +29,8 @@ module.exports = (io)=>{
                     Channel.findByIdAndUpdate(ObjectID(data.channelID),).then((rChannel)=>{
                         rChannel.message.push(rMsg);
                         rChannel.save();
-                        io.emit("newMessage", msg);
+                        //io.emit("newMessage", msg);
+                        io.to(data.channelID).emit("newMessage",msg);
                         console.log(rChannel);
                     }).catch((e)=>{
                         console.log(e);
