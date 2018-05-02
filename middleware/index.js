@@ -16,10 +16,11 @@ middleware.isLogedIn = (req, res, next)=>{
 middleware.isChannelParticipant = (req, res, next)=>{
     Channel.findById(ObjectID(req.params.id)).then((rChannel)=>{
         for(var i =0; i < rChannel.participant.length; i++){
-            //TODO: Checking if current USer ID is in participant list
+            if(rChannel.participant[i].equals(ObjectID(req.user._id))){
+                return next();
+            }
         }
-        next();
-        //res.redirect("/");
+        res.redirect("/channel/join/"+ rChannel._id);
     }).catch((e)=>{
         console.log(e);
         res.redirect("/");

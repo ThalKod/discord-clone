@@ -34,6 +34,16 @@ router.post("/new",middleware.isLogedIn, (req, res)=>{
     
 });
 
+
+router.get("/join/:id", (req, res)=>{
+    console.log(req.params.id);
+    Channel.findById(ObjectID(req.params.id)).then((rChannel)=>{
+        res.send(rChannel);
+    }).catch((e)=>{
+        res.redirect("/");
+    });
+})
+
 router.get("/:id",middleware.isLogedIn, middleware.isChannelParticipant, (req, res)=>{
     Channel.findById(ObjectID(req.params.id)).populate("message").then((rChannel)=>{
         if(!rChannel){
