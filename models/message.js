@@ -10,7 +10,8 @@ var messageSchema = new mongoose.Schema({
             ref: "User"
         },
         name: String
-    }
+    },
+    date: Date.now()
 });
 
 module.exports = mongoose.model("Message", messageSchema);

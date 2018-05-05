@@ -29,7 +29,14 @@ var userSchema = new mongoose.Schema({
     channels:[ {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Channel"
-    }]
+    }],
+    friends: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref:"User"
+        }
+    ],
+    date: Date.now();
 });
 
 //userSchema.plugin(passportLocalMongoose);
