@@ -36,7 +36,10 @@ var userSchema = new mongoose.Schema({
             ref:"User"
         }
     ],
-    date: Date.now();
+    created_at:{
+        type: Date,
+        default: Date.now()
+    } 
 });
 
 //userSchema.plugin(passportLocalMongoose);

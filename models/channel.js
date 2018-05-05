@@ -17,7 +17,10 @@ channelSchema = new mongoose.Schema({
             ref: "User"
         }
     ],
-    date: Date.now()
+    date:{
+        type: Date,
+        default: Date.now()
+    } 
 });
 
 module.exports = mongoose.model("Channel", channelSchema);
