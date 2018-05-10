@@ -10,6 +10,10 @@ router.get("/login", (req, res)=>{
 });
 
 router.post("/login",passport.authenticate('local-login', {failureRedirect : '/users/register'}), (req, res) =>{
+   User.findById(req.user._id).then((rUser)=>{
+    rUser.online = true;
+    rUser.save();
+   })
    res.redirect("/users/@me");
 });
  
@@ -25,6 +29,10 @@ router.post("/register",passport.authenticate('local-signup', {
 });
 
 router.get("/logout", (req, res) =>{
+    User.findById(req.user._id).then((rUser)=>{
+        rUser.online = false;
+        rUser.save();
+       })
     req.logout();
     res.redirect("/");
 });
