@@ -15,11 +15,25 @@
             </ul>
         </div>
 
+        
+
         <form id="message-form" action="">
             <label for="message">Message: </label> <input type="text" placeholder="message" name="message">
             <button>send</button>
         </form>
 
+        <div>
+                <h4>Participant</h4>
+            <ol>
+                    <% channel.participant.forEach(function(participant){ %>
+                        <% if(participant.online === true){ %>
+                            <li><%= participant.username %>-<i><b> Online </b> </i></li>
+                        <% }else{ %>
+                            <li><%= participant.username %></li>
+                        <% } %>
+                    <% }); %>
+            </ol>
+        </div>
 
         <script src="/socket.io/socket.io.js"></script>
         <script src="/js/libs/jquery-3.3.1.min.js"></script>

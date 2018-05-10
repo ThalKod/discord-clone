@@ -59,7 +59,7 @@ router.post("/join/:id", middleware.isLogedIn, (req, res)=>{
 });
 
 router.get("/:id",middleware.isLogedIn, middleware.isChannelParticipant, (req, res)=>{
-    Channel.findById(ObjectID(req.params.id)).populate("message").then((rChannel)=>{
+    Channel.findById(ObjectID(req.params.id)).populate("message").populate("participant").then((rChannel)=>{
         if(!rChannel){
             return res.redirect("/");
         }
