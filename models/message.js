@@ -11,7 +11,7 @@ var messageSchema = new mongoose.Schema({
         },
         name: String
     },
-    date:{
+    created_at:{
         type: Date,
         default: Date.now()
     } 

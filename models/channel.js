@@ -17,10 +17,16 @@ channelSchema = new mongoose.Schema({
             ref: "User"
         }
     ],
-    date:{
+    created_at:{
         type: Date,
         default: Date.now()
-    } 
+    },
+    online_users: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        }
+    ] 
 });
 
 module.exports = mongoose.model("Channel", channelSchema);
