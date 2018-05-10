@@ -23,6 +23,7 @@ router.post("/new",middleware.isLogedIn, (req, res)=>{
             rUser.save();
 
             rChannel.participant.push(rUser._id);
+            rChannel.online
             rChannel.save();
     
             res.redirect("/channel/"+rChannel._id);
@@ -36,10 +37,22 @@ router.post("/new",middleware.isLogedIn, (req, res)=>{
 
 
 router.get("/join/:id", (req, res)=>{
-    console.log(req.params.id);
     Channel.findById(ObjectID(req.params.id)).then((rChannel)=>{
         var ChannelUserCount = rChannel.participant.length;
         res.render("join", {ChannelUserCount, channelID: rChannel._id});
+    }).catch((e)=>{
+        res.redirect("/");
+    });
+});
+
+router.post("/join/:id", middleware.isLogedIn, (req, res)=>{
+    Channel.findById(ObjectID(req.params.id)).then((rChannel)=>{
+        if(!rChannel){
+            res.redirect("/");
+        }
+        rChannel.participant.push(req.user._id);
+        rChannel.save();
+        res.redirect("/channel/"+ rChannel._id);
     }).catch((e)=>{
         res.redirect("/");
     });

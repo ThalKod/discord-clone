@@ -12,7 +12,7 @@ module.exports = (io)=>{
 
         socket.on("join", (params, callback)=>{
             socket.join(params.channelID);
-        
+            
             callback();
         });
 
@@ -49,8 +49,8 @@ module.exports = (io)=>{
         });
 
     
-        socket.on("disconnect", (params)=>{
+        socket.on("disconnect", ()=>{
             console.log("Diconected");
-        })
+        });
     });
 }
