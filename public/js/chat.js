@@ -4,7 +4,8 @@ socket.on("connect", function(){
     console.log("Connected");
 
     var params = {
-        channelID : channelID
+        channelID,
+        userID
     };
 
     socket.emit("join", params, function(err){

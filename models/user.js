@@ -39,7 +39,11 @@ var userSchema = new mongoose.Schema({
     created_at:{
         type: Date,
         default: Date.now()
-    } 
+    },
+    online: {
+        type: Boolean,
+        default: false
+    }
 });
 
 //userSchema.plugin(passportLocalMongoose);

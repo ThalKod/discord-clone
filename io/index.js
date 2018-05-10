@@ -12,6 +12,7 @@ module.exports = (io)=>{
 
         socket.on("join", (params, callback)=>{
             socket.join(params.channelID);
+        
             callback();
         });
 
@@ -26,7 +27,7 @@ module.exports = (io)=>{
                 };
                 Message.create(msg).then((rMsg)=>{ 
                     console.log(rMsg);
-                    Channel.findByIdAndUpdate(ObjectID(data.channelID),).then((rChannel)=>{
+                    Channel.findByIdAndUpdate(ObjectID(data.channelID)).then((rChannel)=>{
                         rChannel.message.push(rMsg);
                         rChannel.save();
                         //io.emit("newMessage", msg);
@@ -48,7 +49,7 @@ module.exports = (io)=>{
         });
 
     
-        socket.on("disconnect", ()=>{
+        socket.on("disconnect", (params)=>{
             console.log("Diconected");
         })
     });
