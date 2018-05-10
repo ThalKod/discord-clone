@@ -63,7 +63,9 @@ router.get("/:id",middleware.isLogedIn, middleware.isChannelParticipant, (req, r
         if(!rChannel){
             return res.redirect("/");
         }
-        res.render("chat", {channel: rChannel});
+        User.findById(req.user._id).populate("channels").then((rUser)=>{
+            res.render("chat", {channel: rChannel, userChannels: rUser.channels});
+        });
     }).catch((e)=>{
         res.redirect("/");
         console.log(e);

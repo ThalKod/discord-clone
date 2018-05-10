@@ -23,7 +23,7 @@
         </form>
 
         <div>
-                <h4>Participant</h4>
+                <h4>-Participant-</h4>
             <ol>
                     <% channel.participant.forEach(function(participant){ %>
                         <% if(participant.online === true){ %>
@@ -31,6 +31,15 @@
                         <% }else{ %>
                             <li><%= participant.username %></li>
                         <% } %>
+                    <% }); %>
+            </ol>
+        </div>
+
+        <div>
+                <h4>-Channels-</h4>
+            <ol>
+                    <% userChannels.forEach(function(channel){ %>
+                        <li><%= channel._id %></li>
                     <% }); %>
             </ol>
         </div>
