@@ -1,0 +1,99 @@
+/*************************************************************
+    Author     : Adrian Rusnac International @ http://armedia.io/
+*************************************************************/
+@media all and (min-width: 768px) {
+  #chat-list {
+    -webkit-transform: none;
+            transform: none;
+    left: 72px; }
+  .page {
+    left: 312px;
+    width: calc(100% - 312px); }
+  .page-single {
+    padding-left: 72px; }
+  .page-header {
+    padding: 10px 30px; }
+  .profile-body {
+    padding: 70px 50px; }
+  .sidebar-menu li a {
+    width: 60px;
+    height: 60px;
+    line-height: 60px; }
+  .toggle-sidebar {
+    display: none; } }
+
+@media all and (max-width: 1024px) {
+  .valign > * {
+    margin-left: auto;
+    margin-right: auto; }
+  .valign > [class*=col-sm],
+  .valign > [class*=col-xs] {
+    margin-left: 0;
+    margin-right: 0; }
+  .valign [class*=col-md] {
+    width: 100%; }
+  .valign > .container {
+    width: 100%; } }
+
+@media all and (max-width: 767px) {
+  .heading1,
+  .heading-xxl,
+  h1 {
+    font-size: 2.4em;
+    line-height: 0.9; }
+  h2 {
+    font-size: 2em; }
+  h3 {
+    font-size: 1.8em; }
+  h4 {
+    font-size: 1.6em; }
+  h5 {
+    font-size: 1.4em; }
+  h6 {
+    font-size: 1.2em; }
+  .heading2 {
+    font-size: 2.2em;
+    line-height: 1; }
+  .heading3 {
+    font-size: 2em;
+    line-height: 1.1; }
+  .heading4 {
+    font-size: 1.6em; }
+  .sub1 {
+    font-size: 1.2em; }
+  .sub2 {
+    font-size: 1.1em; }
+  .sub3 {
+    font-size: 1em; }
+  .small {
+    font-size: 0.875em; }
+  .text-big,
+  .text-big-xl {
+    font-size: 1em; }
+  .invitation {
+    max-width: calc(100vw - 30px); }
+  .sidebar-menu li a {
+    font-size: 12px; }
+  .sidebar-menu .current-server {
+    font-size: 16px; }
+  .modal-block-wrap {
+    left: 15px;
+    right: 15px; }
+  .modal-visible {
+    max-width: none;
+    position: relative;
+    top: auto;
+    left: auto;
+    -webkit-transform: none;
+            transform: none;
+    margin: 0 15px 0 0;
+    width: auto; }
+  .modal-block-content {
+    padding: 50px 30px; }
+  .modal-brand {
+    display: none;
+    min-width: 85px; }
+  .modal-brand-caption .logo {
+    font-size: 1.25em; }
+  .modal-brand-caption .logo > span {
+    margin-top: -2px; } }
