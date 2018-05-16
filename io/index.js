@@ -1,9 +1,5 @@
 const mongoose = require("mongoose"),
       {saveMessage} = require("../io/utils");
-    //   User     = require("../models/user"),
-    //   {ObjectID} = require("mongodb"),
-    //   Message   = require("../models/message"),
-    //   Channel   = require("../models/channel");
 
 
 module.exports = (io)=>{
