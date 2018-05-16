@@ -37,9 +37,8 @@ router.post("/new",middleware.isLogedIn, (req, res)=>{
 
 
 router.get("/join/:id", (req, res)=>{
-    Channel.findById(ObjectID(req.params.id)).then((rChannel)=>{
-        var ChannelUserCount = rChannel.participant.length;
-        res.render("join", {ChannelUserCount, channelID: rChannel._id});
+    Channel.findById(ObjectID(req.params.id)).populate("participant").then((rChannel)=>{
+        res.render("join", {channel: rChannel});
     }).catch((e)=>{
         res.redirect("/");
     });
@@ -49,6 +48,13 @@ router.post("/join/:id", middleware.isLogedIn, (req, res)=>{
     Channel.findById(ObjectID(req.params.id)).then((rChannel)=>{
         if(!rChannel){
             res.redirect("/");
+        }
+        var numberUser = rChannel.participant.length;
+        console.log(numberUser);
+        for(var i = 0; i < numberUser; i++){
+            if(rChannel.participant[i].equals(ObjectID(req.user._id))){
+                return res.redirect("/channel/"+ rChannel._id);
+            }
         }
         rChannel.participant.push(req.user._id);
         rChannel.save();
