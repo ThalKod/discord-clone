@@ -13,13 +13,11 @@ module.exports = (io)=>{
 
         socket.on("join", (params, callback)=>{
             socket.join(params.channelID);
-            
             callback();
         });
 
         socket.on("createdMessage", (data, callback) =>{
             saveMessage(io,data);
-            //io.emit("newMessage", data.message);
             callback();
         });
 

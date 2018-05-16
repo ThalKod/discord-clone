@@ -19,7 +19,6 @@ utils.saveMessage = function saveMessage(io,data){
             Channel.findByIdAndUpdate(ObjectID(data.channelID)).then((rChannel)=>{
                 rChannel.message.push(rMsg);
                 rChannel.save();
-                //io.emit("newMessage", msg);
                 io.to(data.channelID).emit("newMessage",msg);
                 console.log(rChannel);
             }).catch((e)=>{
