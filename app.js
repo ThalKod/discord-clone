@@ -6,78 +6,78 @@ const expressSession   = require("express-session"),
       passport       = require("passport"),
       LocalStrategy  = require("passport-local"),
       mongoose       = require("mongoose"),
-      bcrypt         = require("bcryptjs"),
+      // bcrypt         = require("bcryptjs"),
       passportStrategy = require("./config/passport"),
-      middleware     = require("./middleware/index"),
+      // middleware     = require("./middleware/index"),
       socketIO       = require("socket.io"),
       http           = require("http"),
       indexRoute     = require("./routes/index"),
       userRoute      = require("./routes/user"),
       channelRoute   = require("./routes/channel"),
       methodOverride = require("method-override"),
-      seedDB         = require("./playground/index");
+      // seedDB         = require("./playground/index");
+      app            = express(),
+      server         = http.createServer(app),
+      io             = socketIO(server);
 
-var app = express();
-var server = http.createServer(app);
-var io = socketIO(server);
 require("./io/index")(io);
 
 app.use(express.static(__dirname + "/public"));
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 
 
-//Mongoose config
-mongoose.connect(config.dbURL, function(err){
+// Mongoose config
+mongoose.connect(config.dbURL, (err)=>{
     if(err){
         throw err;
     }
 });
 mongoose.Promise = global.Promise;
 
-//seedDB;
+// seedDB;
 
-//Passport configuration
+// Passport configuration
 app.use((expressSession)({
     secret: "a4fw8542071f-c33873-443447-8ee2321",
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
 }));
 
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Login Strategy
-passport.use('local-login', new LocalStrategy({
-    usernameField : 'email',
-    passwordField : 'password',
-    passReqToCallback : true 
-},passportStrategy.localSiginStrategy));
+// Login Strategy
+passport.use("local-login", new LocalStrategy({
+    usernameField: "email",
+    passwordField: "password",
+    passReqToCallback: true,
+}, passportStrategy.localSiginStrategy));
 
-//Sign UP Strategy
-passport.use('local-signup', new LocalStrategy({
-    usernameField : 'email',
-    passwordField : 'password',
-    passReqToCallback : true
-},passportStrategy.localSignupStrategy));
+// Sign UP Strategy
+passport.use("local-signup", new LocalStrategy({
+    usernameField: "email",
+    passwordField: "password",
+    passReqToCallback: true,
+}, passportStrategy.localSignupStrategy));
 
 // used to serialize the user for the session
-passport.serializeUser(function(user, done) {
+passport.serializeUser((user, done)=>{
     done(null, user.id);
 });
 
 // used to deserialize the user
-passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
+passport.deserializeUser((id, done)=>{
+    User.findById(id, (err, user)=>{
         done(err, user);
     });
 });
 
-app.use(function(req, res, next){
-    res.locals.currentUser = req.user; 
-    next();    
+app.use((req, res, next)=>{
+    res.locals.currentUser = req.user;
+    next();
 });
 
 app.use("/", indexRoute);

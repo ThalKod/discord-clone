@@ -1,15 +1,12 @@
-var express     = require("express"),
-    User        = require("../models/user"),
-    passport    = require("passport");
+const express     = require("express"),
+      User        = require("../models/user"),
+      // passport    = require("passport"),
+      router      = express.Router();
 
-
-var router = express.Router();
- 
 router.get("/", (req, res)=>{
     if(req.user){
-        User.findById(req.user._id).then((rUser)=>{
-            return res.render("index");
-        }).catch((e)=>{
+        User.findById(req.user._id).then(()=>res.render("index"))
+        .catch((e)=>{
             console.log(e);
             return res.render("index");
         });

@@ -1,26 +1,26 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose"),
 
-channelSchema = new mongoose.Schema({
+ channelSchema = new mongoose.Schema({
     message: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Message"
-        }
+            ref: "Message",
+        },
     ],
     creator: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        ref: "User",
     },
-    participant:[
+    participant: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-        }
+            ref: "User",
+        },
     ],
-    created_at:{
+    created_at: {
         type: Date,
-        default: Date.now()
-    }
+        default: Date.now(),
+    },
 });
 
 module.exports = mongoose.model("Channel", channelSchema);

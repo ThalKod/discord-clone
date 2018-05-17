@@ -30,11 +30,16 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^5.0.0",
     "socket.io": "^2.1.0",
-    "validator": "^9.4.1"
+    "validator": "^9.4.1",
+    "cookie-parser": "^1.4.3",
+    "express-session": "^1.15.6"
   },
   "devDependencies": {
-    "cookie-parser": "^1.4.3",
-    "express-session": "^1.15.6",
-    "nodemon": "^1.17.3"
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "install": "^0.11.0",
+    "nodemon": "^1.17.3",
+    "npm": "^6.0.1"
   }
 }

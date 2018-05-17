@@ -1,45 +1,39 @@
-var express     = require("express"),
-    User        = require("../models/user"),
-    passport    = require("passport"),
-    middleware  = require("../middleware/index"),
-    Message     = require("../models/message"),
-    Channel     = require("../models/channel"),
-    {ObjectID} = require("mongodb");
+const   express     = require("express"),
+        User        = require("../models/user"),
+       // passport    = require("passport"),
+        middleware  = require("../middleware/index"),
+       // Message     = require("../models/message"),
+        Channel     = require("../models/channel"),
+        { ObjectID } = require("mongodb"),
+        router = express.Router();
 
-
-
-
-var router = express.Router();
-
-router.post("/new",middleware.isLogedIn, (req, res)=>{
-    var channel = {
-        creator: req.user._id
+router.post("/new", middleware.isLogedIn, (req, res)=>{
+    const channel = {
+        creator: req.user._id,
     };
 
     User.findById(req.user._id).then((rUser)=>{
         Channel.create(channel).then((rChannel)=>{
-            
             rUser.channels.push(rChannel._id);
             rUser.save();
 
             rChannel.participant.push(rUser._id);
-            rChannel.online
+            // rChannel.online
             rChannel.save();
-    
-            res.redirect("/channel/"+rChannel._id);
+            res.redirect(`/channel/${rChannel._id}`);
         }).catch((e)=>{
             console.log(e);
             res.redirect("back");
-        })
+        });
     });
-    
 });
 
 
 router.get("/join/:id", (req, res)=>{
     Channel.findById(ObjectID(req.params.id)).populate("participant").then((rChannel)=>{
-        res.render("join", {channel: rChannel});
+        res.render("join", { channel: rChannel });
     }).catch((e)=>{
+        console.log(e);
         res.redirect("/");
     });
 });
@@ -49,30 +43,32 @@ router.post("/join/:id", middleware.isLogedIn, (req, res)=>{
         if(!rChannel){
             res.redirect("/");
         }
-        var numberUser = rChannel.participant.length;
+        const numberUser = rChannel.participant.length;
         console.log(numberUser);
-        for(var i = 0; i < numberUser; i++){
+        for(let i = 0; i < numberUser; i++){
             if(rChannel.participant[i].equals(ObjectID(req.user._id))){
-                return res.redirect("/channel/"+ rChannel._id);
+                return res.redirect(`/channel/${rChannel._id}`);
             }
         }
         rChannel.participant.push(req.user._id);
         rChannel.save();
-        res.redirect("/channel/"+ rChannel._id);
+        return res.redirect(`/channel/${rChannel._id}`);
     }).catch((e)=>{
+        console.log(e);
         res.redirect("/");
     });
 });
 
-router.get("/:id",middleware.isLogedIn, middleware.isChannelParticipant, (req, res)=>{
+router.get("/:id", middleware.isLogedIn, middleware.isChannelParticipant, (req, res)=>{
     Channel.findById(ObjectID(req.params.id)).populate("message").populate("participant").then((rChannel)=>{
         if(!rChannel){
             return res.redirect("/");
         }
         User.findById(req.user._id).populate("channels").then((rUser)=>{
-            res.render("chat", {channel: rChannel, userChannels: rUser.channels});
+            res.render("chat", { channel: rChannel, userChannels: rUser.channels });
         });
-    }).catch((e)=>{
+    })
+    .catch((e)=>{
         res.redirect("/");
         console.log(e);
     });

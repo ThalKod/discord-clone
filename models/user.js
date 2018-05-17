@@ -1,52 +1,50 @@
-var   mongoose  = require("mongoose"),
-      validator = require("validator"),
-      bcrypt    = require("bcryptjs"),
-      _         = require("lodash");
+const   mongoose  = require("mongoose"),
+        validator = require("validator"),
+        // bcrypt    = require("bcryptjs"),
+        _         = require("lodash"),
 
-var userSchema = new mongoose.Schema({
+ userSchema = new mongoose.Schema({
     username: {
         type: String,
-        unique: true
+        unique: true,
     },
-    email:{
+    email: {
         type: String,
         required: true,
         minlength: 1,
         unique: true,
         trim: true,
-        validate:{
-            validator: (value) =>{
-                return validator.isEmail(value);
-            },
-            message: "Not a valid Email"
-        }
+        validate: {
+            validator: value=>validator.isEmail(value),
+            message: "Not a valid Email",
+        },
     },
     password: {
         type: String,
         minlength: 6,
-        required: true
+        required: true,
     },
-    channels:[ {
+    channels: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Channel"
+        ref: "Channel",
     }],
     friends: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref:"User"
-        }
+            ref: "User",
+        },
     ],
-    created_at:{
+    created_at: {
         type: Date,
-        default: Date.now()
+        default: Date.now(),
     },
     online: {
         type: Boolean,
-        default: false
-    }
+        default: false,
+    },
 });
 
-//userSchema.plugin(passportLocalMongoose);
+// userSchema.plugin(passportLocalMongoose);
 
 // // Generating a hash
 // userSchema.methods.generateHash = function(password) {
@@ -59,10 +57,10 @@ var userSchema = new mongoose.Schema({
 // };
 
 userSchema.methods.toJSON = function(){
-    var user = this;
-    var userObj = user.toObject();
+    const user = this,
+          userObj = user.toObject();
     return _.pick(userObj, ["_id"]);
-}
+};
 
 
 module.exports = mongoose.model("User", userSchema);

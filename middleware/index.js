@@ -1,9 +1,6 @@
-const User = require("../models/user"),
-      Channel = require("../models/channel"),
-      {ObjectID} = require("mongodb");
-
-
-var middleware = {};
+const Channel = require("../models/channel"),
+      { ObjectID } = require("mongodb"),
+      middleware = {};
 
 middleware.isLogedIn = (req, res, next)=>{
     if(req.isAuthenticated()){
@@ -15,17 +12,17 @@ middleware.isLogedIn = (req, res, next)=>{
 
 middleware.isChannelParticipant = (req, res, next)=>{
     Channel.findById(ObjectID(req.params.id)).then((rChannel)=>{
-        for(var i =0; i < rChannel.participant.length; i++){
+        for(let i = 0; i < rChannel.participant.length; i++){
             if(rChannel.participant[i].equals(ObjectID(req.user._id))){
                 return next();
             }
         }
-        res.redirect("/channel/join/"+ rChannel._id);
+        res.redirect("/channel/join/" + rChannel._id);
     }).catch((e)=>{
         console.log(e);
         res.redirect("/");
     });
-}
+};
 
 // middleware.isItUserProfile = (req, res, next)=>{
 //     User.findById(req.params.id).then((rUser)=>{

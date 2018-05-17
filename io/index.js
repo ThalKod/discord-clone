@@ -1,5 +1,4 @@
-const mongoose = require("mongoose"),
-      {saveMessage} = require("../io/utils");
+const { saveMessage } = require("../io/utils");
 
 
 module.exports = (io)=>{
@@ -12,14 +11,13 @@ module.exports = (io)=>{
             callback();
         });
 
-        socket.on("createdMessage", (data, callback) =>{
-            saveMessage(io,data);
+        socket.on("createdMessage", (data, callback)=>{
+            saveMessage(io, data);
             callback();
         });
 
-    
         socket.on("disconnect", ()=>{
             console.log("Diconected");
         });
     });
-}
+};
