@@ -1,6 +1,6 @@
-const mongoose = require("mongoose"),
+const mongoose = require("mongoose");
 
- channelSchema = new mongoose.Schema({
+const channelSchema = new mongoose.Schema({
     message: [
         {
             type: mongoose.Schema.Types.ObjectId,

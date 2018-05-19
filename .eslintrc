@@ -10,7 +10,6 @@
     },
     "rules":{
         "no-console": "off",
-        "one-var": ["error", "always"],
         "no-multi-spaces": "off",
         "quotes": ["error", "double"],
         "indent":"off",

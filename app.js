@@ -1,24 +1,22 @@
-const expressSession   = require("express-session"),
-      User           = require("./models/user"),
-      bodyParser     = require("body-parser"),
-      express        = require("express"),
-      config         = require("./config/config"),
-      passport       = require("passport"),
-      LocalStrategy  = require("passport-local"),
-      mongoose       = require("mongoose"),
-      // bcrypt         = require("bcryptjs"),
-      passportStrategy = require("./config/passport"),
-      // middleware     = require("./middleware/index"),
-      socketIO       = require("socket.io"),
-      http           = require("http"),
-      indexRoute     = require("./routes/index"),
-      userRoute      = require("./routes/user"),
-      channelRoute   = require("./routes/channel"),
-      methodOverride = require("method-override"),
-      // seedDB         = require("./playground/index");
-      app            = express(),
-      server         = http.createServer(app),
-      io             = socketIO(server);
+const expressSession   = require("express-session");
+const User           = require("./models/user");
+const bodyParser     = require("body-parser");
+const express        = require("express");
+const config         = require("./config/config");
+const passport       = require("passport");
+const LocalStrategy  = require("passport-local");
+const mongoose       = require("mongoose");
+const passportStrategy = require("./config/passport");
+const socketIO       = require("socket.io");
+const http           = require("http");
+const indexRoute     = require("./routes/index");
+const userRoute      = require("./routes/user");
+const methodOverride = require("method-override");
+const channelRoute   = require("./routes/channel");
+
+const app            = express();
+const server         = http.createServer(app);
+const io             = socketIO(server);
 
 require("./io/index")(io);
 

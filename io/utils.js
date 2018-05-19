@@ -1,8 +1,9 @@
-const User     = require("../models/user"),
-      { ObjectID } = require("mongodb"),
-      Message   = require("../models/message"),
-      Channel   = require("../models/channel"),
-      utils     = {};
+const User     = require("../models/user");
+const { ObjectID } = require("mongodb");
+const Message   = require("../models/message");
+const Channel   = require("../models/channel");
+
+const utils     = {};
 
 utils.saveMessage = function saveMessage(io, data){
     User.findById(ObjectID(data.userID)).then((rUser)=>{

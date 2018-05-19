@@ -1,9 +1,7 @@
-const // passport       = require("passport"),
-      // LocalStrategy  = require("passport-local"),
-      User           = require("../models/user"),
-      bcrypt         = require("bcryptjs"),
+const User           = require("../models/user");
+const bcrypt         = require("bcryptjs");
 
-  localSignupStrategy = (req, email, password, done)=>{
+const  localSignupStrategy = (req, email, password, done)=>{
     if(email){
       email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
     }
@@ -75,9 +73,9 @@ const // passport       = require("passport"),
             return done(null, req.user);
         }
     });
-},
+};
 
- localSigninStrategy = (req, email, password, done)=>{
+const  localSigninStrategy = (req, email, password, done)=>{
     if(email){
      email = email.toLowerCase(); // Use lower-case e-mails to avoid case-sensitive e-mail matching
     }

@@ -1,12 +1,10 @@
-const   express     = require("express"),
-        User        = require("../models/user"),
-       // passport    = require("passport"),
-        middleware  = require("../middleware/index"),
-       // Message     = require("../models/message"),
-        Channel     = require("../models/channel"),
-        { ObjectID } = require("mongodb"),
-        router = express.Router();
+const   express     = require("express");
+const   User        = require("../models/user");
+const   middleware  = require("../middleware/index");
+const   Channel     = require("../models/channel");
+const   { ObjectID } = require("mongodb");
 
+const       router = express.Router();
 router.post("/new", middleware.isLogedIn, (req, res)=>{
     const channel = {
         creator: req.user._id,

@@ -1,9 +1,8 @@
-const   mongoose  = require("mongoose"),
-        validator = require("validator"),
-        // bcrypt    = require("bcryptjs"),
-        _         = require("lodash"),
+const   mongoose  = require("mongoose");
+const   validator = require("validator");
+const   _         = require("lodash");
 
- userSchema = new mongoose.Schema({
+ const userSchema = new mongoose.Schema({
     username: {
         type: String,
         unique: true,
@@ -56,9 +55,9 @@ const   mongoose  = require("mongoose"),
 //     });
 // };
 
-userSchema.methods.toJSON = function(){
-    const user = this,
-          userObj = user.toObject();
+userSchema.methods.toJSON = ()=>{
+    const user = this;
+    const userObj = user.toObject();
     return _.pick(userObj, ["_id"]);
 };
 

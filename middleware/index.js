@@ -1,6 +1,7 @@
-const Channel = require("../models/channel"),
-      { ObjectID } = require("mongodb"),
-      middleware = {};
+const Channel = require("../models/channel");
+const { ObjectID } = require("mongodb");
+
+const middleware = {};
 
 middleware.isLogedIn = (req, res, next)=>{
     if(req.isAuthenticated()){

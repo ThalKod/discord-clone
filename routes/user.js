@@ -1,8 +1,9 @@
-const express     = require("express"),
-      User        = require("../models/user"),
-      passport    = require("passport"),
-      middleware  = require("../middleware/index"),
-      router = express.Router();
+const express     = require("express");
+const User        = require("../models/user");
+const passport    = require("passport");
+const middleware  = require("../middleware/index");
+
+const     router = express.Router();
 
 router.get("/login", (req, res)=>{
     res.render("login");

@@ -1,7 +1,7 @@
-const express     = require("express"),
-      User        = require("../models/user"),
-      // passport    = require("passport"),
-      router      = express.Router();
+const express     = require("express");
+const User        = require("../models/user");
+
+const router      = express.Router();
 
 router.get("/", (req, res)=>{
     if(req.user){
