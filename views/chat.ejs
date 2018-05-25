@@ -80,7 +80,9 @@
     <div id="sidebar">
         <ul class="sidebar-menu">
             <li class="toggle-sidebar"><a href="#" data-toggle="sidebar"><i class="fas fa-users"></i></a></li>
-            <li><a href="#" class="current-server" data-toggle="tooltip" data-placement="right" data-title="Current Group">O</a></li>
+            <% channels.forEach(function(channel){ %>
+                <li><a href="/channel/<%= channel._id%>" class="current-server" data-toggle="tooltip" data-placement="right" data-title="Channel name"><img src="/img/placeholder-avatar1.jpg" alt=""></a></li>
+            <% }) %>
             <li><a href="#" class="join-server" data-start="modal-custom" data-target="#create-group" data-toggle="tooltip" data-placement="right" data-title="Join a Group"><i class="fa fa-plus"></i></a></li>
         </ul>
     </div>
@@ -118,12 +120,12 @@
                                             <%= message.text %>  
                                     </div>
                                 </div>
-                            </div>
+                        </div>
                     <% }); %>
             </div>
             <div class="chat-footer relative">
-                <form>
-                    <input type="text" class="post-input" placeholder="Please login to chat..." />
+                <form id="message-form" action="">
+                    <input name="message" type="text" class="post-input" placeholder="Your Text..." />
                     <button type="submit" class="post-button"><span class="caret-right"></span></button>
                 </form>
             </div>
@@ -137,6 +139,10 @@
     <script src="/js/libs/bootstrap.min.js"></script>
 
     <!-- Custom JS -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>var userID = "<%= currentUser._id %>";</script>
+    <script>var channelID = "<%= channel._id %>";</script>
+    <script src="/js/chat.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="/js/libs/jquery.mCustomScrollbar.min.js"></script>
     <script src="/js/libs/app.js?rev=@@hash"></script>
