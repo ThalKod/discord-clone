@@ -41,6 +41,10 @@ body {
   background: #061a33;
   color: #ffffff; }
 
+  .current-server img{
+    width: 100%;
+    height: 100%;
+  }
 #bg {
   position: fixed;
   top: 0;

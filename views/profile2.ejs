@@ -51,7 +51,7 @@
         <div class="modal-block">
             <div class="modal-brand">
                 <div class="modal-brand-caption">
-                    <div class="logo">Chat<span>App</span></div>
+                    <div class="logo">Mini<span>Cord</span></div>
                 </div>
             </div>
             <div class="modal-block-content">
@@ -80,14 +80,16 @@
     <div id="sidebar">
         <ul class="sidebar-menu">
             <li class="toggle-sidebar"><a href="#" data-toggle="sidebar"><i class="fas fa-users"></i></a></li>
-            <li><a href="#" class="current-server" data-toggle="tooltip" data-placement="right" data-title="Current Group">O</a></li>
+            <% channels.forEach(function(channel){ %>
+                <li><a href="/channel/<%= channel._id%>" class="current-server" data-toggle="tooltip" data-placement="right" data-title="Channel name"><img src="/img/placeholder-avatar1.jpg" alt=""></a></li>
+            <% }) %>
             <li><a href="#" class="join-server" data-start="modal-custom" data-target="#create-group" data-toggle="tooltip" data-placement="right" data-title="Join a Group"><i class="fa fa-plus"></i></a></li>
         </ul>
     </div>
 
     <div id="page">
         <div id="chat-list">
-            <a href="#" class="user"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div>johndoe</a>
+            <a href="#" class="user"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div><%= currentUser.username %></a>
             <ul class="chat-list scroll-hijack">
             
             </ul>
@@ -119,10 +121,9 @@
                                 <p class="mb-25 clr-fade text-small">Click a group to copy the invite link to clipboard</p>
                                 <div class="groups-list scroll-hijack">
                                     <ul class="list">
-                                        <li><a href="#" data-invite-link="https://invite.me/"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div>random5884</a></li>
-                                        <li><a href="#" data-invite-link="https://invite.me/"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div>random3858</a></li>
-                                        <li><a href="#" data-invite-link="https://invite.me/"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div>random2381</a></li>
-                                        <li><a href="#" data-invite-link="https://invite.me/"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div>random3858</a></li>
+                                        <% currentUser.channels.forEach(function(channel){ %>
+                                            <li><a href="/channel/<%=channel%>" data-invite-link="/channel/join/<%=channel%>"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div>random3858</a></li>
+                                        <%});%>
                                     </ul>
                                 </div>
                             </div>
@@ -137,11 +138,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="profile_email">Email</label>
-                                        <input type="email" name="profile_email" id="profile_email" class="form-control" value="john.doe@email.com" />
+                                        <input type="email" name="profile_email" id="profile_email" class="form-control" value="<%= currentUser.email %>" />
                                     </div>
                                     <div class="form-group">
                                         <label for="profile_username">Username</label>
-                                        <input type="text" name="profile_username" id="profile_username" class="form-control" value="johndoe" />
+                                        <input type="text" name="profile_username" id="profile_username" class="form-control" value="<%= currentUser.username %>" />
                                     </div>
                                     <div class="form-group">
                                         <label for="profile_password">Password</label>
