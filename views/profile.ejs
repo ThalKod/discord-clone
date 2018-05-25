@@ -1,27 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Minicord | Profile</title>
-    </head>
-    <body>
-        <a href="/">Home</a>
-        <h1>User Profile</h1>
-        <% if(!currentUser.username){ %>
-            <p><b>Name: </b> <i>No Username</i></p>
-        <% }else{ %>
-            <p><b>Name: </b> <%= currentUser.username %></p>
-        <% } %>
-        <p><b>Email: </b> <%= currentUser.email %> </p>
 
-        <button><a href="/users/@me/update">Setting</a></button>
+<head>
 
-        <form action="/channel/new" method="POST">
-            <button>Create new Channel</button>
-        </form>
-        
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Simple Discord Clone">
+    <meta name="author" content="Thal Marcelin">
 
-    </body>
+    <title>My Profile | MiniCord</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/fontawesome-all.min.css" rel="stylesheet">
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/stylesheets/jquery.mCustomScrollbar.css" rel="stylesheet">
+    <link href="/stylesheets/main.css?rev=@@hash" rel="stylesheet">
+    <link href="/stylesheets/main-responsive.css?rev=@@hash" rel="stylesheet">
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="bg">
+        <div id="particles-js"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">MiniCord</a>
+            </div>
+            <div class="navbar-menu">
+                <a href="/users/logout" class="btn btn-primary">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="create-group" class="modal-block-wrap">
+        <div class="modal-block">
+            <div class="modal-brand">
+                <div class="modal-brand-caption">
+                    <div class="logo">Mini<span>Cord</span></div>
+                </div>
+            </div>
+            <div class="modal-block-content">
+                <span class="modal-close"><i class="fas fa-times"></i></span>
+                <h3>Create a new group</h3>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <p class="label mb-10">Choose a profile photo (max size: 64x64)</p>
+                        <label for="group_photo" class="group-photo-placeholder avatar-placeholder" data-toggle="tooltip" data-title="Upload a group photo" data-placement="bottom"><img src="img/placeholder.png" /></label>
+                        <input id="group_photo" class="group-photo" type="file" />
+                    </div>
+                    <div class="form-group">
+                        <label for="group_name">Group Name</label>
+                        <input type="text" name="group_name" id="group_name" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <p class="help-block2 mb-25">By creating a group, you agree to ChatApp <a href="#" data-toggle="modal-custom" data-target="#login" class="clr-primary link-underline">Community Guidelines</a>.</p>
+                        <button type="submit" class="btn btn-block btn-radius btn-primary">Create Group</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div id="sidebar">
+        <ul class="sidebar-menu">
+            <li class="toggle-sidebar"><a href="#" data-toggle="sidebar"><i class="fas fa-users"></i></a></li>
+            <% channels.forEach(function(channel){ %>
+                <li><a href="/channel/<%= channel._id%>" class="current-server" data-toggle="tooltip" data-placement="right" data-title="Channel name"><img src="/img/placeholder-avatar1.jpg" alt=""></a></li>
+            <% }) %>
+            <li><a href="#" class="join-server" data-start="modal-custom" data-target="#create-group" data-toggle="tooltip" data-placement="right" data-title="Join a Group"><i class="fa fa-plus"></i></a></li>
+        </ul>
+    </div>
+
+    <div id="page">
+        <div id="chat-list">
+            <a href="#" class="user"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div><%= currentUser.username %></a>
+            <ul class="chat-list scroll-hijack">
+            
+            </ul>
+        </div>
+        <div id="profile" class="page">
+            <div class="page-header clearfix">
+                <span>My Profile</span>
+                <ul>
+                    <!-- <li><a title="Online" href="#">Online - 1</a></li> -->
+                </ul>
+            </div>
+            <div class="profile-body scroll-hijack">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="row valign">
+                            <div class="col-md-6">
+                                <h6 class="text-bold mb-25">Friend List</h6>
+                                <div class="friend-list scroll-hijack">
+                                    <ul class="list">
+                                        <li><a href="#"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div>random5884</a></li>
+                                        <li><a href="#"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div>random3858</a></li>
+                                        <li><a href="#"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div>random2381</a></li>
+                                        <li><a href="#"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div>random3858</a></li>
+                                        <li><a href="#"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div>random2381</a></li>
+                                        <li><a href="#"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div>random2948</a></li>
+                                    </ul>
+                                </div>
+                                <h6 class="text-bold mt-25">Groups List</h6>
+                                <p class="mb-25 clr-fade text-small">Click a group to copy the invite link to clipboard</p>
+                                <div class="groups-list scroll-hijack">
+                                    <ul class="list">
+                                        <% currentUser.channels.forEach(function(channel){ %>
+                                            <li><a href="/channel/<%=channel%>" data-invite-link="/channel/join/<%=channel%>"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div>random3858</a></li>
+                                        <%});%>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mt-25 visible-xs visible-sm"></div>
+                                <h6 class="text-bold">Profile Settings</h6>
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <p class="label mb-10">Choose a profile photo</p>
+                                        <label for="profile_photo" class="profile-photo-placeholder avatar-placeholder" data-toggle="tooltip" data-title="Upload a profile photo" data-placement="bottom"><img src="/img/placeholder.png" /></label>
+                                        <input id="profile_photo" class="profile-photo" type="file" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="profile_email">Email</label>
+                                        <input type="email" name="profile_email" id="profile_email" class="form-control" value="<%= currentUser.email %>" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="profile_username">Username</label>
+                                        <input type="text" name="profile_username" id="profile_username" class="form-control" value="<%= currentUser.username %>" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="profile_password">Password</label>
+                                        <input type="password" name="profile_password" id="profile_password" class="form-control" value="johndoe" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="profile_c_password">Confirm Password</label>
+                                        <input type="password" name="profile_c_password" id="profile_c_password" class="form-control" value="johndoe" />
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-radius">Save Changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery Version 1.11.1 -->
+    <script src="/js/libs/jquery-3.2.1.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/libs/bootstrap.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="/js/libs/jquery.mCustomScrollbar.min.js"></script>
+    <script src="/js/libs/app.js?rev=@@hash"></script>
+
+</body>
+
 </html>
