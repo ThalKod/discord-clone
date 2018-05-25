@@ -1,53 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Minicord | Channel Name</title>
-    </head>
-    <body>
-        <div>
-            <ul id="messages">
-                <% channel.message.forEach(function(message){ %>
-                    <li><b><%= message.author.name %></b> : <i><%= message.text %></i></li>
-                <% }); %>
-            </ul>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Simple Discord Clone">
+    <meta name="author" content="Thal Marcelin">
+
+    <title>MiniCord</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/fontawesome-all.min.css" rel="stylesheet">
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/stylesheets/jquery.mCustomScrollbar.css" rel="stylesheet">
+    <link href="/stylesheets/main.css?rev=@@hash" rel="stylesheet">
+    <link href="/stylesheets/main-responsive.css?rev=@@hash" rel="stylesheet">
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="bg">
+        <div id="particles-js"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">MiniCord</a>
+            </div>
+            <div class="navbar-menu">
+                <a href="/users/logout" class="btn btn-primary">Logout</a>
+            </div>
         </div>
+    </nav>
 
-        
+    <div id="create-group" class="modal-block-wrap">
+        <div class="modal-block">
+            <div class="modal-brand">
+                <div class="modal-brand-caption">
+                    <div class="logo">Chat<span>App</span></div>
+                </div>
+            </div>
+            <div class="modal-block-content">
+                <span class="modal-close"><i class="fas fa-times"></i></span>
+                <h3>Create a new group</h3>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <p class="label mb-10">Choose a profile photo (max size: 64x64)</p>
+                        <label for="group_photo" class="group-photo-placeholder avatar-placeholder" data-toggle="tooltip" data-title="Upload a group photo" data-placement="bottom"><img src="img/placeholder.png" /></label>
+                        <input id="group_photo" class="group-photo" type="file" />
+                    </div>
+                    <div class="form-group">
+                        <label for="group_name">Group Name</label>
+                        <input type="text" name="group_name" id="group_name" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <p class="help-block2 mb-25">By creating a group, you agree to ChatApp <a href="#" data-toggle="modal-custom" data-target="#login" class="clr-primary link-underline">Community Guidelines</a>.</p>
+                        <button type="submit" class="btn btn-block btn-radius btn-primary">Create Group</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-        <form id="message-form" action="">
-            <label for="message">Message: </label> <input type="text" placeholder="message" name="message">
-            <button>send</button>
-        </form>
+    <!-- Page Content -->
+    <div id="sidebar">
+        <ul class="sidebar-menu">
+            <li class="toggle-sidebar"><a href="#" data-toggle="sidebar"><i class="fas fa-users"></i></a></li>
+            <li><a href="#" class="current-server" data-toggle="tooltip" data-placement="right" data-title="Current Group">O</a></li>
+            <li><a href="#" class="join-server" data-start="modal-custom" data-target="#create-group" data-toggle="tooltip" data-placement="right" data-title="Join a Group"><i class="fa fa-plus"></i></a></li>
+        </ul>
+    </div>
 
-        <div>
-                <h4>-Participant-</h4>
-            <ol>
+    <div id="page">
+        <div id="chat-list">
+            <a href="/users/@me" class="user"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div><%= currentUser.username %></a>
+            <ul class="chat-list scroll-hijack">
                     <% channel.participant.forEach(function(participant){ %>
-                        <% if(participant.online === true){ %>
-                            <li><%= participant.username %>-<i><b> Online </b> </i></li>
+                        <%if(participant._id.equals(currentUser._id)){ %>
+
+                        <% }else if(participant.online === true){ %>
+                            <li><a href="#" class="user"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div><%= participant.username %></a></li>
                         <% }else{ %>
-                            <li><%= participant.username %></li>
+                            <li><a href="#"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div><%= participant.username %></a></li>
                         <% } %>
                     <% }); %>
-            </ol>
+            </ul>
         </div>
-
-        <div>
-                <h4>-Channels-</h4>
-            <ol>
-                    <% userChannels.forEach(function(channel){ %>
-                        <li><%= channel._id %></li>
+        <div id="chat" class="page">
+            <div class="page-header clearfix">
+                <span>My Server</span>
+                <ul>
+                    <!-- <li><a title="Online" href="#">Online - 1</a></li> -->
+                </ul>
+            </div>
+            <div class="chat-body scroll-hijack">
+                    <% channel.message.forEach(function(message){ %>
+                        <div class="chat-message">
+                                <div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div>
+                                <div class="chat-message-content">
+                                    <a href="#" class="chat-message-author"><%= message.author.name %></a>
+                                    <span class="chat-message-date">Tuesday at 04:49 PM</span>
+                                    <div class="chat-message-message">
+                                            <%= message.text %>  
+                                    </div>
+                                </div>
+                            </div>
                     <% }); %>
-            </ol>
+            </div>
+            <div class="chat-footer relative">
+                <form>
+                    <input type="text" class="post-input" placeholder="Please login to chat..." />
+                    <button type="submit" class="post-button"><span class="caret-right"></span></button>
+                </form>
+            </div>
         </div>
+    </div>
 
-        <script src="/socket.io/socket.io.js"></script>
-        <script src="/js/libs/jquery-3.3.1.min.js"></script>
-        <script>var userID = "<%= currentUser._id %>";</script>
-        <script>var channelID = "<%= channel._id %>";</script>
-        <script src="/js/chat.js"></script>
-    </body>
+    <!-- jQuery Version 1.11.1 -->
+    <script src="/js/libs/jquery-3.2.1.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/libs/bootstrap.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="/js/libs/jquery.mCustomScrollbar.min.js"></script>
+    <script src="/js/libs/app.js?rev=@@hash"></script>
+
+</body>
+
 </html>
