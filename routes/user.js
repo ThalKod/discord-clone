@@ -41,7 +41,7 @@ router.get("/logout", (req, res)=>{
 // Users Profile
 router.get("/@me", middleware.isLogedIn, (req, res)=>{
     User.findById(req.user._id).populate("channels").then(()=>{
-        res.render("profile");
+        res.render("profile2");
     }).catch((e)=>{
         res.send(e);
     });
