@@ -8,6 +8,7 @@ const       router = express.Router();
 router.post("/new", middleware.isLogedIn, (req, res)=>{
     const channel = {
         creator: req.user._id,
+        channel_name: req.body.channel_name,
     };
 
     User.findById(req.user._id).then((rUser)=>{
