@@ -47,14 +47,6 @@ router.get("/@me", middleware.isLogedIn, (req, res)=>{
     });
 });
 
-// Update User Profile
-router.get("/@me/update", middleware.isLogedIn, (req, res)=>{
-    User.findById(req.user._id).then(()=>res.render("edit_profile")).catch((e)=>{
-        console.log(e);
-        res.redirect("/");
-    });
-});
-
 router.patch("/@me/update", middleware.isLogedIn, (req, res)=>{
     User.findByIdAndUpdate(req.user._id, req.body.user).then(()=>res.redirect("/users/@me")).catch((e)=>{
         console.log(e);
