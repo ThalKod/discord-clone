@@ -130,7 +130,7 @@
                             <div class="col-md-6">
                                 <div class="mt-25 visible-xs visible-sm"></div>
                                 <h6 class="text-bold">Profile Settings</h6>
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" action="/users/@me/update?_method=PATCH" method="POST">
                                     <div class="form-group">
                                         <p class="label mb-10">Choose a profile photo</p>
                                         <label for="profile_photo" class="profile-photo-placeholder avatar-placeholder" data-toggle="tooltip" data-title="Upload a profile photo" data-placement="bottom"><img src="/img/placeholder.png" /></label>
@@ -138,11 +138,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="profile_email">Email</label>
-                                        <input type="email" name="profile_email" id="profile_email" class="form-control" value="<%= currentUser.email %>" />
+                                        <input type="email" name="user[email]" disabled id="profile_email" class="form-control" value="<%= currentUser.email %>" />
                                     </div>
                                     <div class="form-group">
                                         <label for="profile_username">Username</label>
-                                        <input type="text" name="profile_username" id="profile_username" class="form-control" value="<%= currentUser.username %>" />
+                                        <input type="text" name="user[username]" id="profile_username" class="form-control" value="<%= currentUser.username %>" />
                                     </div>
                                     <div class="form-group">
                                         <label for="profile_password">Password</label>
