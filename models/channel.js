@@ -17,6 +17,10 @@ const channelSchema = new mongoose.Schema({
             ref: "User",
         },
     ],
+    channel_name: {
+        type: String,
+        required: true,
+    },
     created_at: {
         type: Date,
         default: Date.now(),
