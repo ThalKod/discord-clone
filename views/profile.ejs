@@ -9,7 +9,7 @@
     <meta name="description" content="Simple Discord Clone">
     <meta name="author" content="Thal Marcelin">
 
-    <title>My Profile | MiniCord</title>
+    <title>MiniCord | <%= currentUser.username %></title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/fontawesome-all.min.css" rel="stylesheet">
@@ -81,7 +81,7 @@
         <ul class="sidebar-menu">
             <li class="toggle-sidebar"><a href="#" data-toggle="sidebar"><i class="fas fa-users"></i></a></li>
             <% channels.forEach(function(channel){ %>
-                <li><a href="/channel/<%= channel._id%>" class="current-server" data-toggle="tooltip" data-placement="right" data-title="Channel name"><img src="/img/placeholder-avatar1.jpg" alt=""></a></li>
+                <li><a href="/channel/<%= channel._id%>" class="current-server" data-toggle="tooltip" data-placement="right" data-title="<%=channel.channel_name%>"><img src="/img/placeholder-avatar1.jpg" alt=""></a></li>
             <% }) %>
             <li><a href="#" class="join-server" data-start="modal-custom" data-target="#create-group" data-toggle="tooltip" data-placement="right" data-title="Join a Group"><i class="fa fa-plus"></i></a></li>
         </ul>
@@ -121,8 +121,8 @@
                                 <p class="mb-25 clr-fade text-small">Click a group to copy the invite link to clipboard</p>
                                 <div class="groups-list scroll-hijack">
                                     <ul class="list">
-                                        <% currentUser.channels.forEach(function(channel){ %>
-                                            <li><a href="/channel/<%=channel%>" data-invite-link="/channel/join/<%=channel%>"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div>random3858</a></li>
+                                        <% channels.forEach(function(channel){ %>
+                                            <li><a href="/channel/<%=channel._id%>" data-invite-link="/channel/join/<%=channel._id%>"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div><%=channel.channel_name%></a></li>
                                         <%});%>
                                     </ul>
                                 </div>

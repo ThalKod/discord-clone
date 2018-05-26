@@ -9,7 +9,7 @@
     <meta name="description" content="Simple Discord Clone">
     <meta name="author" content="Thal Marcelin">
 
-    <title>MiniCord</title>
+    <title>MiniCord | <%= channel.channel_name %></title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/fontawesome-all.min.css" rel="stylesheet">
@@ -81,7 +81,7 @@
         <ul class="sidebar-menu">
             <li class="toggle-sidebar"><a href="#" data-toggle="sidebar"><i class="fas fa-users"></i></a></li>
             <% channels.forEach(function(channel){ %>
-                <li><a href="/channel/<%= channel._id%>" class="current-server" data-toggle="tooltip" data-placement="right" data-title="Channel name"><img src="/img/placeholder-avatar1.jpg" alt=""></a></li>
+                <li><a href="/channel/<%= channel._id%>" class="current-server" data-toggle="tooltip" data-placement="right" data-title="<%= channel.channel_name %>"><img src="/img/placeholder-avatar1.jpg" alt=""></a></li>
             <% }) %>
             <li><a href="#" class="join-server" data-start="modal-custom" data-target="#create-group" data-toggle="tooltip" data-placement="right" data-title="Join a Group"><i class="fa fa-plus"></i></a></li>
         </ul>
@@ -104,7 +104,7 @@
         </div>
         <div id="chat" class="page">
             <div class="page-header clearfix">
-                <span>My Server</span>
+                <span><%= channel.channel_name %></span>
                 <ul>
                     <!-- <li><a title="Online" href="#">Online - 1</a></li> -->
                 </ul>

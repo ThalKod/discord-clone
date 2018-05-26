@@ -9,7 +9,7 @@
     <meta name="description" content="Discord clone chat">
     <meta name="author" content="Thal Marcelin">
 
-    <title>MiniCord | Join channelname</title>
+    <title>MiniCord | Join <%= channels.channel_name %></title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/stylesheets/fontawesome-all.min.css" rel="stylesheet">
@@ -49,10 +49,10 @@
         </div>
         <div class="invitation-info">
             <div class="col">
-                <div class="group-avatar"><img src="img/placeholder-avatar2.jpg" /></div>
+                <div class="group-avatar"><img src="/img/placeholder-avatar2.jpg" /></div>
             </div>
             <div class="col">
-                <h6 class="mb-10">My Group</h6>
+                <h6 class="mb-10"><%= channel.channel_name %></h6>
                 <ul class="group-stats">
                     <li><%= channel.participant.length %> users registered</li>
                     <% var count = 0; %>
