@@ -53,10 +53,36 @@ socket.on("newMessage", function(message){
     `);
 
     jQuery("#mCSB_2_container").append(div);
+    scrollToBottom();
 });
 
 socket.on("disconnect", function(){
     console.log("Disconnected to server");
 });
+
+// if User is looking at previous message we should not scroll down -- not yet implemented
+function scrollToBottom(){
+    // // Selectors
+     var element = jQuery(".scroll-hijack");
+    // var messagesContainer = jQuery("#mCSB_2_container");
+    // var chatbody = jQuery("#mCSB_2");
+    // var newMessage = messagesContainer.children().last();
+
+    // // // Heights
+    // var clientHeight = messagesContainer.prop("clientHeight");
+    // var scrollTop = messagesContainer.prop("scrollTop");
+    // var scrollHeight = messagesContainer.prop("scrollHeight");
+    // var newMessageHeight = newMessage.innerHeight();
+    // var lastMessageHeight = newMessage.prev().innerHeight();
+
+    // console.log(clientHeight, scrollTop, scrollHeight, newMessageHeight, lastMessageHeight);
+
+    // if(clientHeight + scrollTop + newMessageHeight + lastMessageHeight >= scrollHeight){
+    //     console.log("scroll");
+        element.mCustomScrollbar("scrollTo","bottom");
+    // }
+
+
+}
 
 // "<b>"+ message.author.name+"</b> : <i>"+message.text+"</i>"

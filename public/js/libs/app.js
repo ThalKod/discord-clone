@@ -1,6 +1,4 @@
-/*************************************************************
- Author     : Adrian Rusnac International @ http://armedia.io
- *************************************************************/
+/* eslint-disable */
 
 //Custom Scroll Bar
 (function ($) {
@@ -16,6 +14,8 @@
                 mouseWheelPixels: 100
             });
         }
+        $element.mCustomScrollbar("scrollTo","bottom");
+
     });
 })(jQuery);
 
