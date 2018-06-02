@@ -115,7 +115,7 @@
                                 <div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div>
                                 <div class="chat-message-content">
                                     <a href="#" class="chat-message-author"><%= message.author.name %></a>
-                                    <span class="chat-message-date">Tuesday at 04:49 PM</span>
+                                    <span class="chat-message-date"><%= message.created_at %></span>
                                     <div class="chat-message-message">
                                             <%= message.text %>  
                                     </div>
@@ -143,6 +143,7 @@
     <script>var userID = "<%= currentUser._id %>";</script>
     <script>var channelID = "<%= channel._id %>";</script>
     <script src="/js/chat.js"></script>
+    <script src="/js/libs/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="/js/libs/jquery.mCustomScrollbar.min.js"></script>
     <script src="/js/libs/app.js?rev=@@hash"></script>

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const moment   = require("moment");
 
 const messageSchema = new mongoose.Schema({
     text: {
@@ -12,8 +13,8 @@ const messageSchema = new mongoose.Schema({
         name: String,
     },
     created_at: {
-        type: Date,
-        default: Date.now(),
+        type: String,
+        default: moment().format("dddd [at] h:mm a"),
     },
 });
 
