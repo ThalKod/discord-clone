@@ -50,7 +50,6 @@ router.get("/@me", middleware.isLogedIn, (req, res)=>{
 
 router.patch("/@me/update", middleware.isLogedIn, (req, res)=>{
     User.findByIdAndUpdate(req.user._id, req.body.user).then((rUser)=>{
-        console.log(rUser);
         Message.find({ "author.id": rUser._id }).then((rMessage)=>{
             rMessage.forEach((message)=>{
                 message.author.name = req.body.user.username;
