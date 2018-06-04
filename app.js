@@ -83,6 +83,7 @@ app.use("/users", userRoute);
 app.use("/channel", channelRoute);
 
 
-server.listen(process.env.PORT || 5000, ()=>{
-    console.log("listenning on 5000");
+server.listen(config.port, ()=>{
+    console.log("listenning on" + config.port);
 });
+
