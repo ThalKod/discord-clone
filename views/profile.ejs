@@ -81,7 +81,7 @@
         <ul class="sidebar-menu">
             <li class="toggle-sidebar"><a href="#" data-toggle="sidebar"><i class="fas fa-users"></i></a></li>
             <% channels.forEach(function(channel){ %>
-                <li><a href="/channel/<%= channel._id%>" class="current-server" data-toggle="tooltip" data-placement="right" data-title="<%=channel.channel_name%>"><img src="/img/placeholder-avatar1.jpg" alt=""></a></li>
+                <li><a href="/channel/<%= channel._id%>" class="current-server" data-toggle="tooltip" data-placement="right" data-title="<%=channel.channel_name%>"><img src="/img/placeholder-channel<%= Math.floor((Math.random() * 4) + 1) %>.jpg" alt=""></a></li>
             <% }) %>
             <li><a href="#" class="join-server" data-start="modal-custom" data-target="#create-group" data-toggle="tooltip" data-placement="right" data-title="Join a Group"><i class="fa fa-plus"></i></a></li>
         </ul>
@@ -89,7 +89,7 @@
 
     <div id="page">
         <div id="chat-list">
-            <a href="#" class="user"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div><%= currentUser.username %></a>
+            <a href="#" class="user"><div class="avatar"><img src="/img/placeholder-avatar<%= Math.floor((Math.random() * 7) + 1) %>.jpg" /></div><%= currentUser.username %></a>
             <ul class="chat-list scroll-hijack">
             
             </ul>
@@ -109,12 +109,12 @@
                                 <h6 class="text-bold mb-25">Friend List</h6>
                                 <div class="friend-list scroll-hijack">
                                     <ul class="list">
-                                        <li><a href="#"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div>random5884</a></li>
-                                        <li><a href="#"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div>random3858</a></li>
-                                        <li><a href="#"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div>random2381</a></li>
-                                        <li><a href="#"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div>random3858</a></li>
-                                        <li><a href="#"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div>random2381</a></li>
-                                        <li><a href="#"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div>random2948</a></li>
+                                        <li><a href="#"><div class="avatar"><img src="/img/placeholder-avatar<%= Math.floor((Math.random() * 7) + 1) %>.jpg" /></div>random5884</a></li>
+                                        <li><a href="#"><div class="avatar"><img src="/img/placeholder-avatar<%= Math.floor((Math.random() * 7) + 1) %>.jpg" /></div>random3858</a></li>
+                                        <li><a href="#"><div class="avatar"><img src="/img/placeholder-avatar<%= Math.floor((Math.random() * 7) + 1) %>.jpg" /></div>random2381</a></li>
+                                        <li><a href="#"><div class="avatar"><img src="/img/placeholder-avatar<%= Math.floor((Math.random() * 7) + 1) %>.jpg" /></div>random3858</a></li>
+                                        <li><a href="#"><div class="avatar"><img src="/img/placeholder-avatar<%= Math.floor((Math.random() * 7) + 1) %>.jpg" /></div>random2381</a></li>
+                                        <li><a href="#"><div class="avatar"><img src="/img/placeholder-avatar<%= Math.floor((Math.random() * 7) + 1) %>.jpg" /></div>random2948</a></li>
                                     </ul>
                                 </div>
                                 <h6 class="text-bold mt-25">Groups List</h6>
@@ -122,7 +122,7 @@
                                 <div class="groups-list scroll-hijack">
                                     <ul class="list">
                                         <% channels.forEach(function(channel){ %>
-                                            <li><a href="/channel/<%=channel._id%>" data-invite-link="/channel/join/<%=channel._id%>"><div class="avatar"><img src="/img/placeholder-avatar1.jpg" /></div><%=channel.channel_name%></a></li>
+                                            <li><a href="/channel/<%=channel._id%>" data-invite-link="/channel/join/<%=channel._id%>"><div class="avatar"><img src="/img/placeholder-channel<%= Math.floor((Math.random() * 4) + 1) %>.jpg" /></div><%=channel.channel_name%></a></li>
                                         <%});%>
                                     </ul>
                                 </div>
