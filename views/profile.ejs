@@ -122,7 +122,7 @@
                                 <div class="groups-list scroll-hijack">
                                     <ul class="list">
                                         <% channels.forEach(function(channel){ %>
-                                            <li><a href="/channel/<%=channel._id%>" data-invite-link="/channel/join/<%=channel._id%>"><div class="avatar"><img src="/img/placeholder-channel<%= Math.floor((Math.random() * 4) + 1) %>.jpg" /></div><%=channel.channel_name%></a></li>
+                                            <li><a href="/channel/<%=channel._id%>" data-invite-link="https://minicord.herokuapp.com/channel/join/<%=channel._id%>"><div class="avatar"><img src="/img/placeholder-channel<%= Math.floor((Math.random() * 4) + 1) %>.jpg" /></div><%=channel.channel_name%></a></li>
                                         <%});%>
                                     </ul>
                                 </div>
