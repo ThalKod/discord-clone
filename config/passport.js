@@ -29,7 +29,6 @@ const  localSignupStrategy = (req, email, password, done)=>{
                                     return done(rErr);
                                 }
 
-                                console.log(rUser);
                                 return done(null, rUser);
                             });
                         });
@@ -60,7 +59,6 @@ const  localSignupStrategy = (req, email, password, done)=>{
                                     return done(err);
                                 }
 
-                                console.log(rUser2);
                                 return done(null, rUser2);
                             });
                         });
