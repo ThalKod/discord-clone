@@ -5,13 +5,13 @@ const router      = express.Router();
 
 router.get("/", (req, res)=>{
     if(req.user){
-        User.findById(req.user._id).then(()=>res.render("index"))
+        User.findById(req.user._id).then(()=>res.redirect("/users/@me"))
         .catch((e)=>{
             console.log(e);
-            return res.render("index");
+            return res.redirect("/users/login");
         });
     }else{
-        res.render("index");
+        res.redirect("/users/login");
     }
 });
 
