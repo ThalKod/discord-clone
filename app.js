@@ -18,21 +18,29 @@ const app            = express();
 const server         = http.createServer(app);
 const io             = socketIO(server);
 
+// Configure IO
 require("./io/index")(io);
 
+// Configure app and mongoose
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
-
-
-// Mongoose config
-mongoose.connect(config.dbURL, (err)=>{
-    if(err){
-        throw err;
-    }
-});
 mongoose.Promise = global.Promise;
+
+
+// boot if db is available
+mongoose.connect(config.dbURL, { reconnectTries: 5 })
+    .then(()=>{
+        // boot
+        server.listen(config.port, ()=>{
+            console.log("listenning on " + config.port);
+        });
+    })
+    .catch((dbErr)=>{
+        console.log("DB Connection Error: ", dbErr.message);
+        process.exit(1);
+    });
 
 // seedDB;
 
@@ -78,12 +86,7 @@ app.use((req, res, next)=>{
     next();
 });
 
+// Routes
 app.use("/", indexRoute);
 app.use("/users", userRoute);
 app.use("/channel", channelRoute);
-
-
-server.listen(config.port, ()=>{
-    console.log("listenning on" + config.port);
-});
-
