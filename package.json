@@ -21,7 +21,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
-    "ejs": "^2.5.9",
+    "ejs": "^2.6.1",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "lodash": "^4.17.5",
