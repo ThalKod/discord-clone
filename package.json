@@ -41,6 +41,6 @@
     "eslint-plugin-import": "^2.12.0",
     "install": "^0.11.0",
     "nodemon": "^1.17.3",
-    "npm": "^6.0.1"
+    "npm": "^6.1.0"
   }
 }
