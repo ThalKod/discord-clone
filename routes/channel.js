@@ -16,6 +16,10 @@ router.post("/new", middleware.isLogedIn, (req, res)=>{
     };
 
     User.findById(req.user._id).then((rUser)=>{
+        if(!rUser){
+            return res.redirect("/");
+        }
+
         Channel.create(channel).then((rChannel)=>{
             rUser.channels.push(rChannel._id);
             rUser.save();
@@ -38,6 +42,10 @@ router.get("/join/:id", (req, res)=>{
     }
 
     Channel.findById(ObjectID(req.params.id)).populate("participant").then((rChannel)=>{
+        if(!rChannel){
+            res.redirect("/");
+        }
+
         res.render("join", { channel: rChannel });
     }).catch((e)=>{
         console.log(e);

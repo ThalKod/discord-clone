@@ -29,7 +29,7 @@ router.post("/register", passport.authenticate("local-signup", {
     console.log("User Registered");
 });
 
-router.get("/logout", (req, res)=>{
+router.get("/logout", middleware.isLogedIn, (req, res)=>{
     User.findById(req.user._id).then((rUser)=>{
         rUser.online = false;
         rUser.save();
