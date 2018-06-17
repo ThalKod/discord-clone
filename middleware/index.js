@@ -12,6 +12,10 @@ middleware.isLogedIn = (req, res, next)=>{
 };
 
 middleware.isChannelParticipant = (req, res, next)=>{
+    if(!ObjectID.isValid(req.params.id)){
+        return res.redirect("/");
+    }
+
     Channel.findById(ObjectID(req.params.id)).then((rChannel)=>{
         for(let i = 0; i < rChannel.participant.length; i++){
             if(rChannel.participant[i].equals(ObjectID(req.user._id))){

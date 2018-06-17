@@ -6,6 +6,10 @@ const   { ObjectID } = require("mongodb");
 
 const       router = express.Router();
 router.post("/new", middleware.isLogedIn, (req, res)=>{
+    if(!ObjectID.isValid(req.user._id)){
+        return res.redirect("/");
+    }
+
     const channel = {
         creator: req.user._id,
         channel_name: req.body.channel_name,
@@ -29,6 +33,10 @@ router.post("/new", middleware.isLogedIn, (req, res)=>{
 
 
 router.get("/join/:id", (req, res)=>{
+    if(!ObjectID.isValid(req.params.id)){
+        return res.redirect("/");
+    }
+
     Channel.findById(ObjectID(req.params.id)).populate("participant").then((rChannel)=>{
         res.render("join", { channel: rChannel });
     }).catch((e)=>{
@@ -38,6 +46,10 @@ router.get("/join/:id", (req, res)=>{
 });
 
 router.post("/join/:id", middleware.isLogedIn, (req, res)=>{
+    if(!ObjectID.isValid(req.params.id)){
+        return res.redirect("/");
+    }
+
     Channel.findById(ObjectID(req.params.id)).then((rChannel)=>{
         if(!rChannel){
             res.redirect("/");
@@ -63,6 +75,10 @@ router.post("/join/:id", middleware.isLogedIn, (req, res)=>{
 });
 
 router.get("/:id", middleware.isLogedIn, middleware.isChannelParticipant, (req, res)=>{
+    if(!ObjectID.isValid(req.params.id)){
+        return res.redirect("/");
+    }
+
     Channel.findById(ObjectID(req.params.id)).populate("message").populate("participant").then((rChannel)=>{
         if(!rChannel){
             return res.redirect("/");
