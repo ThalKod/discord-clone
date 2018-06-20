@@ -33,7 +33,7 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^5.0.0",
     "socket.io": "^2.1.1",
-    "validator": "^10.3.0"
+    "validator": "^10.4.0"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
