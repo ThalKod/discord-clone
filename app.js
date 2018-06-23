@@ -1,17 +1,18 @@
-const expressSession   = require("express-session");
-const User           = require("./models/user");
+const expressSession = require("express-session");
+const methodOverride = require("method-override");
+const http           = require("http");
+const socketIO       = require("socket.io");
 const bodyParser     = require("body-parser");
 const express        = require("express");
-const config         = require("./config/config");
 const passport       = require("passport");
 const LocalStrategy  = require("passport-local");
 const mongoose       = require("mongoose");
+const flash          = require("req-flash");
+const User           = require("./models/user");
+const config         = require("./config/config");
 const passportStrategy = require("./config/passport");
-const socketIO       = require("socket.io");
-const http           = require("http");
 const indexRoute     = require("./routes/index");
 const userRoute      = require("./routes/user");
-const methodOverride = require("method-override");
 const channelRoute   = require("./routes/channel");
 
 const app            = express();
@@ -80,6 +81,8 @@ passport.deserializeUser((id, done)=>{
         done(err, user);
     });
 });
+
+app.use(flash());
 
 app.use((req, res, next)=>{
     res.locals.currentUser = req.user;
