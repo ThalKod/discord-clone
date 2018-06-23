@@ -1,5 +1,7 @@
 /* eslint-disable */
 const socket = io();
+const chatList = $("#chat-list ul");
+const username = $("#chat-list a");
 
 socket.on("connect", function(){
     console.log("Connected");
@@ -92,7 +94,18 @@ function scrollToBottom(){
     console.log("Fetching online user...");
     $.get("/current/channel/"+ channelID )
         .done(function(data){
-            console.log(data);
+            chatList.html("");
+            data.forEach(function(participant){ 
+                const randomNumber = Math.floor((Math.random() * 7) + 1);
+                const pUsername = participant.username;
+                if(pUsername !== username["0"].text){
+                    if(participant.online === true){
+                        chatList.append(`<li><a href="#" class="user"><div class="avatar"><img src="/img/placeholder-avatar${randomNumber}.jpg" /></div>${pUsername}</a></li>`);
+                    }else{
+                         chatList.append(`<li><a href="#"><div class="avatar"><img src="/img/placeholder-avatar${randomNumber}.jpg" /></div>${pUsername}</a></li>`);
+                    }
+                }
+            });
         });
-    setTimeout(fetchOnlineUser,60000);
+    setTimeout(fetchOnlineUser,30000);
 }())
