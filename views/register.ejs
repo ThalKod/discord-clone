@@ -64,6 +64,9 @@
             <div class="modal-block-content">
                 <h3>Register a new account!</h3>
                 <form class="form-horizontal" action="/users/register" method="POST">
+                    <%if(error && error.length > 0){%>
+                        <%= error %>
+                    <%}%>
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" name="email" id="r_email" class="form-control" />
