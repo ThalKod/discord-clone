@@ -1,8 +1,9 @@
 const express     = require("express");
+const passport    = require("passport");
 const User        = require("../models/user");
 const Message     = require("../models/message");
-const passport    = require("passport");
 const middleware  = require("../middleware/index");
+
 
 const     router = express.Router();
 
@@ -19,12 +20,14 @@ router.post("/login", passport.authenticate("local-login", { failureRedirect: "/
 });
 
 router.get("/register", (req, res)=>{
+    console.log(req.flash("error"));
     res.render("register");
 });
 
 router.post("/register", passport.authenticate("local-signup", {
     successRedirect: "/", // redirect to the secure profile section
     failureRedirect: "/users/register", // redirect back to the signup page if there is an error
+    failureFlash: true,
 }), ()=>{
     console.log("User Registered");
 });

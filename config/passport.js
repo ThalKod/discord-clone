@@ -1,5 +1,5 @@
-const User           = require("../models/user");
 const bcrypt         = require("bcryptjs");
+const User           = require("../models/user");
 
 const  localSignupStrategy = (req, email, password, done)=>{
     if(email){
@@ -16,7 +16,7 @@ const  localSignupStrategy = (req, email, password, done)=>{
                 }
                 // check to see if theres already a user with that email
                 if(user){
-                    return done(null, false);
+                    return done(null, false, { message: "User already registered" });
                 }else{
                     bcrypt.genSalt(10, (errC, salt)=>{
                         bcrypt.hash(password, salt, (errCrypt, res)=>{
