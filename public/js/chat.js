@@ -88,4 +88,11 @@ function scrollToBottom(){
 
 }
 
-// "<b>"+ message.author.name+"</b> : <i>"+message.text+"</i>"
+(function fetchOnlineUser(){
+    console.log("Fetching online user...");
+    $.get("/current/channel/"+ channelID )
+        .done(function(data){
+            console.log(data);
+        });
+    setTimeout(fetchOnlineUser,60000);
+}())

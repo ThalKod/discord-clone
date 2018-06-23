@@ -1,8 +1,8 @@
 const   express     = require("express");
+const   { ObjectID } = require("mongodb");
 const   User        = require("../models/user");
 const   middleware  = require("../middleware/index");
 const   Channel     = require("../models/channel");
-const   { ObjectID } = require("mongodb");
 
 const       router = express.Router();
 router.post("/new", middleware.isLogedIn, (req, res)=>{

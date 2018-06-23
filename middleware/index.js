@@ -1,5 +1,5 @@
-const Channel = require("../models/channel");
 const { ObjectID } = require("mongodb");
+const Channel = require("../models/channel");
 
 const middleware = {};
 

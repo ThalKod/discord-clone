@@ -14,6 +14,7 @@ const passportStrategy = require("./config/passport");
 const indexRoute     = require("./routes/index");
 const userRoute      = require("./routes/user");
 const channelRoute   = require("./routes/channel");
+const ajaxRoute      = require("./routes/ajax");
 
 const app            = express();
 const server         = http.createServer(app);
@@ -94,3 +95,4 @@ app.use((req, res, next)=>{
 app.use("/", indexRoute);
 app.use("/users", userRoute);
 app.use("/channel", channelRoute);
+app.use(ajaxRoute);
