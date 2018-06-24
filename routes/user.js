@@ -25,11 +25,14 @@ router.get("/register", (req, res)=>{
 });
 
 router.post("/register", passport.authenticate("local-signup", {
-    successRedirect: "/", // redirect to the secure profile section
     failureRedirect: "/users/register", // redirect back to the signup page if there is an error
     failureFlash: true,
-}), ()=>{
-    console.log("User Registered");
+}), (req, res)=>{
+    User.findById(req.user._id).then((rUser)=>{
+        rUser.online = true;
+        rUser.save();
+       });
+       res.redirect("/users/@me");
 });
 
 router.get("/logout", middleware.isLogedIn, (req, res)=>{

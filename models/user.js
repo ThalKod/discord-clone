@@ -1,6 +1,6 @@
 const   mongoose  = require("mongoose");
 const   validator = require("validator");
-const   _         = require("lodash");
+// const   _         = require("lodash");
 
  const userSchema = new mongoose.Schema({
     username: {
@@ -55,11 +55,11 @@ const   _         = require("lodash");
 //     });
 // };
 
-userSchema.methods.toJSON = ()=>{
-    const user = this;
-    const userObj = user.toObject();
-    return _.pick(userObj, ["_id"]);
-};
+// userSchema.methods.toJSON = ()=>{
+//     const user = this;
+//     const userObj = user.toObject();
+//     return _.pick(userObj, ["_id"]);
+// };
 
 
 module.exports = mongoose.model("User", userSchema);
