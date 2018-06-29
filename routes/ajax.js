@@ -8,7 +8,7 @@ const   router = express.Router();
 
 
 router.get("/current/channel/:id", middleware.isLogedIn, middleware.isChannelParticipant, (req, res)=>{
-    console.log("get request");
+    // console.log("get request");
     Channel.findById(req.params.id).populate("participant").then((rChannel)=>{
         const participantList = [];
         rChannel.participant.forEach((participant)=>{

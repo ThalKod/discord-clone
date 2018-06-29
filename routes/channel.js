@@ -1,5 +1,6 @@
 const   express     = require("express");
 const   { ObjectID } = require("mongodb");
+const   moment      = require("moment");
 const   User        = require("../models/user");
 const   middleware  = require("../middleware/index");
 const   Channel     = require("../models/channel");
@@ -92,7 +93,7 @@ router.get("/:id", middleware.isLogedIn, middleware.isChannelParticipant, (req, 
             return res.redirect("/");
         }
         User.findById(req.user._id).populate("channels").then((rUser)=>{
-            res.render("chat", { channel: rChannel, channels: rUser.channels });
+            res.render("chat", { channel: rChannel, channels: rUser.channels, moment });
         });
     })
     .catch((e)=>{

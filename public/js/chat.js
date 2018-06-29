@@ -42,7 +42,7 @@ jQuery("#message-form").on("submit", function(e){
 
 socket.on("newMessage", function(message){
 
-    const formatedTime = moment().format("dddd [at] h:mm a");
+    const formatedTime = moment(message.created_at).format("lll");
     const tempRandomNum = Math.floor((Math.random() * 7) + 1);
 
     const div = jQuery("<div class='chat-message'></div>");

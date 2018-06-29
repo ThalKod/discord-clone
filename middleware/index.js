@@ -16,7 +16,11 @@ middleware.isChannelParticipant = (req, res, next)=>{
         return res.redirect("/");
     }
 
+
     Channel.findById(ObjectID(req.params.id)).then((rChannel)=>{
+        if(!rChannel){
+            return res.redirect("/");
+        }
         for(let i = 0; i < rChannel.participant.length; i++){
             if(rChannel.participant[i].equals(ObjectID(req.user._id))){
                 return next();

@@ -116,7 +116,7 @@
                                 <div class="avatar"><img src="/img/placeholder-avatar<%= Math.floor((Math.random() * 7) + 1) %>.jpg" /></div>
                                 <div class="chat-message-content">
                                     <a href="#" class="chat-message-author"><%= message.author.name %></a>
-                                    <span class="chat-message-date"><%= message.created_at %></span>
+                                    <span class="chat-message-date"><%= moment(message.created_at).format("lll")  %></span>
                                     <div class="chat-message-message">
                                             <%= message.text %>  
                                     </div>
