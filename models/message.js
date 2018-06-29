@@ -13,8 +13,8 @@ const messageSchema = new mongoose.Schema({
         name: String,
     },
     created_at: {
-        type: String,
-        default: moment().format("dddd [at] h:mm a"),
+        type: Date,
+        default: Date.now,
     },
 });
 

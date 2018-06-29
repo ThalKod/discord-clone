@@ -35,7 +35,7 @@ const   validator = require("validator");
     ],
     created_at: {
         type: Date,
-        default: Date.now(),
+        default: Date.now,
     },
     online: {
         type: Boolean,
