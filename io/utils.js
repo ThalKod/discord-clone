@@ -1,5 +1,5 @@
-const User     = require("../models/user");
 const { ObjectID } = require("mongodb");
+const User     = require("../models/user");
 const Message   = require("../models/message");
 const Channel   = require("../models/channel");
 

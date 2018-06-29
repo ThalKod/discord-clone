@@ -3,7 +3,7 @@ const { saveMessage } = require("../io/utils");
 
 module.exports = (io)=>{
         io.on("connection", (socket)=>{
-        console.log("New User Connected");
+        // console.log("New User Connected");
 
 
         socket.on("join", (params, callback)=>{
@@ -17,7 +17,7 @@ module.exports = (io)=>{
         });
 
         socket.on("disconnect", ()=>{
-            console.log("Diconected");
+            // console.log("Diconected");
         });
     });
 };
