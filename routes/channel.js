@@ -92,8 +92,12 @@ router.get("/:id", middleware.isLogedIn, middleware.isChannelParticipant, (req, 
         if(!rChannel){
             return res.redirect("/");
         }
+
+        const renderedChanel = rChannel;
+        renderedChanel.message = renderedChanel.message.slice(renderedChanel.message.length - 10, renderedChanel.message.length);
+
         User.findById(req.user._id).populate("channels").then((rUser)=>{
-            res.render("chat", { channel: rChannel, channels: rUser.channels, moment });
+            res.render("chat", { channel: renderedChanel, channels: rUser.channels, moment });
         });
     })
     .catch((e)=>{

@@ -33,7 +33,6 @@ jQuery("#message-form").on("submit", function(e){
         message: messageTextBox.val()
     };
 
-    console.log(messageTextBox.val());
 
     socket.emit('createdMessage', data, function(){
         messageTextBox.val(" ");
@@ -91,7 +90,6 @@ function scrollToBottom(){
 }
 
 (function fetchOnlineUser(){
-    console.log("Fetching online user...");
     $.get("/current/channel/"+ channelID )
         .done(function(data){
             chatList.html("");
