@@ -8,7 +8,7 @@ const middleware  = require("../middleware/index");
 const     router = express.Router();
 
 router.get("/login", (req, res)=>{
-    res.render("login");
+    res.render("login", { title: "Login" });
 });
 
 router.post("/login", passport.authenticate("local-login", { failureRedirect: "/users/register" }), (req, res)=>{
@@ -21,7 +21,7 @@ router.post("/login", passport.authenticate("local-login", { failureRedirect: "/
 
 router.get("/register", (req, res)=>{
     console.log(req.flash("error"));
-    res.render("register");
+    res.render("register", { title: "Register" });
 });
 
 router.post("/register", passport.authenticate("local-signup", {
@@ -48,7 +48,7 @@ router.get("/logout", middleware.isLogedIn, (req, res)=>{
 // Users Profile
 router.get("/@me", middleware.isLogedIn, (req, res)=>{
     User.findById(req.user._id).populate("channels").then((rUser)=>{
-        res.render("profile", { channels: rUser.channels });
+        res.render("profile", { channels: rUser.channels, title: "username" });
     }).catch((e)=>{
         res.send(e);
     });
