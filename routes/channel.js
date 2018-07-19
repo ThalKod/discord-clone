@@ -6,6 +6,7 @@ const   middleware  = require("../middleware/index");
 const   Channel     = require("../models/channel");
 
 const       router = express.Router();
+
 router.post("/new", middleware.isLogedIn, (req, res)=>{
     if(!ObjectID.isValid(req.user._id)){
         return res.redirect("/");
@@ -97,7 +98,7 @@ router.get("/:id", middleware.isLogedIn, middleware.isChannelParticipant, (req, 
         renderedChanel.message = renderedChanel.message.slice(renderedChanel.message.length - 10, renderedChanel.message.length);
 
         User.findById(req.user._id).populate("channels").then((rUser)=>{
-            res.render("chat", { channel: renderedChanel, channels: rUser.channels, moment });
+            res.render("chat", { channel: renderedChanel, channels: rUser.channels, title: renderedChanel.channel_name, moment });
         });
     })
     .catch((e)=>{
