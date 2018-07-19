@@ -48,7 +48,7 @@ router.get("/join/:id", (req, res)=>{
             res.redirect("/");
         }
 
-        res.render("join", { channel: rChannel });
+        res.render("join", { channel: rChannel, title: "join" });
     }).catch((e)=>{
         console.log(e);
         res.redirect("/");

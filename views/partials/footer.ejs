@@ -6,8 +6,10 @@
 
         <!-- Custom JS -->
         <script src="/socket.io/socket.io.js"></script>
-        <script>var userID = "<%= currentUser._id %>";</script>
-        <script>var channelID = "<%= channel._id %>";</script>
+        <% if(title !== "Login" && title !== "Register" && title !== "username" && title !== "join"){ %>
+            <script>var userID = "<%= currentUser._id %>";</script>
+            <script>var channelID = "<%= channel._id %>";</script>
+        <% } %>
         <script src="/js/chat.js"></script>
         <script src="/js/libs/moment.min.js"></script>
         <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
