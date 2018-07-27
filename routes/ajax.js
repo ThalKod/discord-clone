@@ -22,4 +22,8 @@ router.get("/current/channel/:id", middleware.isLogedIn, middleware.isChannelPar
     });
 });
 
+router.post("/profile/img", (req, res)=>{
+    console.log("called");
+});
+
 module.exports = router;
