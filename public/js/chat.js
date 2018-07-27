@@ -6,10 +6,11 @@ const username = $("#chat-list a");
 socket.on("connect", function(){
     console.log("Connected");
 
-    var params = {
-        channelID,
-        userID
-    };
+        const params = {
+            channelID,
+            userID
+        };
+    
 
     socket.emit("join", params, function(err){
         if(err){

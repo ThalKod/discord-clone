@@ -8,6 +8,10 @@ const init = function(){
             maxFilesize: 2, // in Mb
         });
         console.log("Create it");
+
+        uploader.on("sending", function(file) {
+            console.log("sending file...");
+        });
     }
 }
 
