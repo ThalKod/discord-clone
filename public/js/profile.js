@@ -13,6 +13,13 @@ const init = function(){
         uploader.on("sending", function(file) {
             console.log("sending file...");
         });
+
+        uploader.on("success", function(file) {
+
+            const img = document.getElementById("profile_photo_img");
+            const response = JSON.parse(file.xhr.response);
+            img.src = response.path;
+        });
     }
 }
 

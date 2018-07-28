@@ -6,12 +6,13 @@ require("string.prototype.startswith");
 const crypto = require("crypto");
 const middleware  = require("../middleware/index");
 const Channel     = require("../models/channel");
+const User = require("../models/user");
 
 const router = express.Router();
 
 const upload = multer({
     storage: multer.diskStorage({
-        destination: path.join(__dirname, "../files/image/profile"),
+        destination: path.join(__dirname, "../public/files/image/profile"),
         filename: (req, file, cb)=>{
             crypto.pseudoRandomBytes(4, (err, raw)=>{
                 const mimeType = mime.lookup(file.originalname);
@@ -43,9 +44,16 @@ router.get("/current/channel/:id", middleware.isLogedIn, middleware.isChannelPar
     });
 });
 
-router.post("/profile/img", upload.single("file"), (req, res)=>{
+router.post("/profile/img", middleware.isLogedIn, upload.single("file"), (req, res)=>{
     if(req.file){
-       return console.log(req.file);
+        const file = {
+            path: "/files/image/profile/" + req.file.filename,
+        };
+       User.findByIdAndUpdate(req.user._id, { profile_picture: req.file.filename }).then(()=>{
+            res.send(file);
+        });
+    }else{
+        res.json({ error: true });
     }
 });
 
