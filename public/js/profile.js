@@ -6,6 +6,7 @@ const init = function(){
             url: "/profile/img",
             maxFiles: 1,
             maxFilesize: 2, // in Mb
+            acceptedFiles: 'image/*',
         });
         console.log("Create it");
 

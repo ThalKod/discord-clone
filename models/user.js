@@ -27,6 +27,9 @@ const   validator = require("validator");
         type: mongoose.Schema.Types.ObjectId,
         ref: "Channel",
     }],
+    profile_picture: {
+        type: String,
+    },
     friends: [
         {
             type: mongoose.Schema.Types.ObjectId,

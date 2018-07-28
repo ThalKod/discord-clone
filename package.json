@@ -36,6 +36,7 @@
     "passport-local-mongoose": "^5.0.1",
     "req-flash": "0.0.3",
     "socket.io": "^2.1.1",
+    "string.prototype.startswith": "^0.2.0",
     "validator": "^10.4.0"
   },
   "devDependencies": {
