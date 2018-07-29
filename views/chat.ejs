@@ -39,7 +39,7 @@
                         <div class="chat-message">
                                 <div class="avatar"><img src="<%= message.author.profile_picture %>" /></div>
                                 <div class="chat-message-content">
-                                    <a href="#" class="chat-message-author"><%= message.author.name %></a>
+                                    <a href="#" class="chat-message-author"><%= message.author.username %></a>
                                     <span class="chat-message-date"><%= moment(message.created_at).format("lll")  %></span>
                                     <div class="chat-message-message">
                                             <%= message.text %>  

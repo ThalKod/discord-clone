@@ -6,6 +6,7 @@ const crypto = require("crypto");
 const middleware  = require("../middleware/index");
 const Channel     = require("../models/channel");
 const User = require("../models/user");
+const Message = require("../models/message");
 
 const router = express.Router();
 
@@ -51,6 +52,7 @@ router.post("/profile/img", middleware.isLogedIn, upload.single("file"), (req, r
             path: "/files/image/profile/" + req.file.filename,
         };
        User.findByIdAndUpdate(req.user._id, { profile_picture: "/files/image/profile/" + req.file.filename }).then(()=>{
+            // Temporary solution to handle the profile message change... profile picture should not be save in message 
             res.send(file);
         });
     }else{

@@ -9,11 +9,7 @@ utils.saveMessage = function saveMessage(io, data){
     User.findById(ObjectID(data.userID)).then((rUser)=>{
         const msg = {
             text: data.message,
-            author: {
-                id: rUser._id,
-                name: rUser.username,
-                profile_picture: rUser.profile_picture,
-            },
+            author: rUser,
         };
         Message.create(msg).then((rMsg)=>{
             Channel.findByIdAndUpdate(ObjectID(data.channelID)).then((rChannel)=>{

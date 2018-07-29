@@ -5,12 +5,8 @@ const messageSchema = new mongoose.Schema({
         type: String,
     },
     author: {
-            id: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "User",
-            },
-        name: String,
-        profile_picture: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
     },
     created_at: {
         type: Date,

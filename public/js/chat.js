@@ -43,13 +43,12 @@ jQuery("#message-form").on("submit", function(e){
 socket.on("newMessage", function(message){
 
     const formatedTime = moment(message.created_at).format("lll");
-    const tempRandomNum = Math.floor((Math.random() * 7) + 1);
 
     const div = jQuery("<div class='chat-message'></div>");
     div.html(`
             <div class="avatar"><img src="${message.author.profile_picture}" /></div>
             <div class="chat-message-content">
-                <a href="#" class="chat-message-author">${message.author.name}</a>
+                <a href="#" class="chat-message-author">${message.author.username}</a>
                 <span class="chat-message-date">${formatedTime}</span>
                 <div class="chat-message-message">
                         ${message.text} 
