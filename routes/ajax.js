@@ -43,13 +43,13 @@ router.get("/current/channel/:id", middleware.isLogedIn, middleware.isChannelPar
     });
 });
 
-// Set the profile picture of a user 
+// Set the profile picture of a user
 router.post("/profile/img", middleware.isLogedIn, upload.single("file"), (req, res)=>{
     if(req.file){
         const file = {
             path: "/files/image/profile/" + req.file.filename,
         };
-       User.findByIdAndUpdate(req.user._id, { profile_picture: req.file.filename }).then(()=>{
+       User.findByIdAndUpdate(req.user._id, { profile_picture: "/files/image/profile/" + req.file.filename }).then(()=>{
             res.send(file);
         });
     }else{

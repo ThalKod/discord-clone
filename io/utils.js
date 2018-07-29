@@ -12,6 +12,7 @@ utils.saveMessage = function saveMessage(io, data){
             author: {
                 id: rUser._id,
                 name: rUser.username,
+                profile_picture: rUser.profile_picture,
             },
         };
         Message.create(msg).then((rMsg)=>{

@@ -47,7 +47,7 @@ socket.on("newMessage", function(message){
 
     const div = jQuery("<div class='chat-message'></div>");
     div.html(`
-            <div class="avatar"><img src="/img/placeholder-avatar${tempRandomNum}.jpg" /></div>
+            <div class="avatar"><img src="${message.author.profile_picture}" /></div>
             <div class="chat-message-content">
                 <a href="#" class="chat-message-author">${message.author.name}</a>
                 <span class="chat-message-date">${formatedTime}</span>

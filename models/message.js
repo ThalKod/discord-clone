@@ -10,6 +10,7 @@ const messageSchema = new mongoose.Schema({
                 ref: "User",
             },
         name: String,
+        profile_picture: String,
     },
     created_at: {
         type: Date,

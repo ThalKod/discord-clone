@@ -14,15 +14,15 @@
 
     <div id="page">
         <div id="chat-list">
-            <a href="/users/@me" class="user"><div class="avatar"><img src="/img/placeholder-avatar<%= Math.floor((Math.random() * 7) + 1) %>.jpg" /></div><%= currentUser.username %></a>
+            <a href="/users/@me" class="user"><div class="avatar"><img src="<%= currentUser.profile_picture %>" /></div><%= currentUser.username %></a>
             <ul class="chat-list scroll-hijack">
                     <% channel.participant.forEach(function(participant){ %>
                         <%if(participant._id.equals(currentUser._id)){ %>
 
                         <% }else if(participant.online === true){ %>
-                            <li><a href="#" class="user"><div class="avatar"><img src="/img/placeholder-avatar<%= Math.floor((Math.random() * 7) + 1) %>.jpg" /></div><%= participant.username %></a></li>
+                            <li><a href="#" class="user"><div class="avatar"><img src="<%= participant.profile_picture %>" /></div><%= participant.username %></a></li>
                         <% }else{ %>
-                            <li><a href="#"><div class="avatar"><img src="/img/placeholder-avatar<%= Math.floor((Math.random() * 7) + 1) %>.jpg" /></div><%= participant.username %></a></li>
+                            <li><a href="#"><div class="avatar"><img src="<%= participant.profile_picture %>" /></div><%= participant.username %></a></li>
                         <% } %>
                     <% }); %>
             </ul>
@@ -37,7 +37,7 @@
             <div class="chat-body scroll-hijack">
                     <% channel.message.forEach(function(message){ %>
                         <div class="chat-message">
-                                <div class="avatar"><img src="/img/placeholder-avatar<%= Math.floor((Math.random() * 7) + 1) %>.jpg" /></div>
+                                <div class="avatar"><img src="<%= message.author.profile_picture %>" /></div>
                                 <div class="chat-message-content">
                                     <a href="#" class="chat-message-author"><%= message.author.name %></a>
                                     <span class="chat-message-date"><%= moment(message.created_at).format("lll")  %></span>
