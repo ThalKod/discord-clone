@@ -29,6 +29,7 @@ const   validator = require("validator");
     }],
     profile_picture: {
         type: String,
+        default: "/img/placeholder.png",
     },
     friends: [
         {
