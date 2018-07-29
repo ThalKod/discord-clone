@@ -99,9 +99,9 @@ function scrollToBottom(){
                 const pUsername = participant.username;
                 if(pUsername !== username["0"].text){
                     if(participant.online === true){
-                        chatList.append(`<li><a href="#" class="user"><div class="avatar"><img src="/img/placeholder-avatar${randomNumber}.jpg" /></div>${pUsername}</a></li>`);
+                        chatList.append(`<li><a href="#" class="user"><div class="avatar"><img class="little_avatar"  src="${participant.image}" /></div>${pUsername}</a></li>`);
                     }else{
-                         chatList.append(`<li><a href="#"><div class="avatar"><img src="/img/placeholder-avatar${randomNumber}.jpg" /></div>${pUsername}</a></li>`);
+                         chatList.append(`<li><a href="#"><div class="avatar"><img class="little_avatar"  src="${participant.image}" /></div>${pUsername}</a></li>`);
                     }
                 }
             });

@@ -36,6 +36,7 @@ router.get("/current/channel/:id", middleware.isLogedIn, middleware.isChannelPar
             const aParticipant = {
                 username: participant.username,
                 online: participant.online,
+                image: participant.profile_picture,
             };
             participantList.push(aParticipant);
         });

@@ -20,9 +20,9 @@
                         <%if(participant._id.equals(currentUser._id)){ %>
 
                         <% }else if(participant.online === true){ %>
-                            <li><a href="#" class="user"><div class="avatar"><img src="<%= participant.profile_picture %>" /></div><%= participant.username %></a></li>
+                            <li><a href="#" class="user"><div class="avatar"><img class="little_avatar"  src="<%= participant.profile_picture %>" /></div><%= participant.username %></a></li>
                         <% }else{ %>
-                            <li><a href="#"><div class="avatar"><img src="<%= participant.profile_picture %>" /></div><%= participant.username %></a></li>
+                            <li><a href="#"><div class="avatar"><img class="little_avatar"  src="<%= participant.profile_picture %>" /></div><%= participant.username %></a></li>
                         <% } %>
                     <% }); %>
             </ul>

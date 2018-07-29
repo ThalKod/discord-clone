@@ -625,7 +625,7 @@ a:focus {
     position: relative;
     margin-right: 10px; }
     .user .avatar img {
-      border-radius: 100%; }
+      border-radius: 100%; height: 15px; }
     .user .avatar:before {
       content: "";
       position: absolute;
@@ -711,8 +711,13 @@ a:focus {
        object-fit: cover;
     max-width: 100%;
     min-height: 100%;
+    height: 40px;
     min-width: 100%;
     border-radius: 100%; }
+
+.avatar .little_avatar {
+  height: 20px;
+}
 
 .chat-footer {
   padding: 30px;
