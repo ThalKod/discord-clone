@@ -2,7 +2,6 @@ const express     = require("express");
 const multer = require("multer");
 const mime = require("mime-types");
 const path = require("path");
-require("string.prototype.startswith");
 const crypto = require("crypto");
 const middleware  = require("../middleware/index");
 const Channel     = require("../models/channel");
@@ -28,7 +27,7 @@ const upload = multer({
     }),
 });
 
-
+// Get and return the current participant in a channel
 router.get("/current/channel/:id", middleware.isLogedIn, middleware.isChannelParticipant, (req, res)=>{
     // console.log("get request");
     Channel.findById(req.params.id).populate("participant").then((rChannel)=>{
@@ -44,6 +43,7 @@ router.get("/current/channel/:id", middleware.isLogedIn, middleware.isChannelPar
     });
 });
 
+// Set the profile picture of a user 
 router.post("/profile/img", middleware.isLogedIn, upload.single("file"), (req, res)=>{
     if(req.file){
         const file = {
