@@ -55,13 +55,7 @@ router.get("/@me", middleware.isLogedIn, (req, res)=>{
 });
 
 router.patch("/@me/update", middleware.isLogedIn, (req, res)=>{
-    User.findByIdAndUpdate(req.user._id, req.body.user).then((rUser)=>{
-        Message.find({ "author.id": rUser._id }).then((rMessage)=>{
-            rMessage.forEach((message)=>{
-                message.author.name = req.body.user.username;
-                message.save();
-            });
-        });
+    User.findByIdAndUpdate(req.user._id, req.body.user).then(()=>{
         res.redirect("/users/@me");
     }).catch((e)=>{
         console.log(e);

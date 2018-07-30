@@ -89,7 +89,7 @@ router.get("/:id", middleware.isLogedIn, middleware.isChannelParticipant, (req, 
         return res.redirect("/");
     }
 
-    Channel.findById(ObjectID(req.params.id)).populate("message").populate("participant").then((rChannel)=>{
+    Channel.findById(ObjectID(req.params.id)).populate({ path: "message", populate: { path: "author" } }).populate("participant").then((rChannel)=>{
         if(!rChannel){
             return res.redirect("/");
         }

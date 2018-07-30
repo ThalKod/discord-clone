@@ -6,10 +6,11 @@ const username = $("#chat-list a");
 socket.on("connect", function(){
     console.log("Connected");
 
-    var params = {
-        channelID,
-        userID
-    };
+        const params = {
+            channelID,
+            userID
+        };
+    
 
     socket.emit("join", params, function(err){
         if(err){
@@ -42,13 +43,12 @@ jQuery("#message-form").on("submit", function(e){
 socket.on("newMessage", function(message){
 
     const formatedTime = moment(message.created_at).format("lll");
-    const tempRandomNum = Math.floor((Math.random() * 7) + 1);
 
     const div = jQuery("<div class='chat-message'></div>");
     div.html(`
-            <div class="avatar"><img src="/img/placeholder-avatar${tempRandomNum}.jpg" /></div>
+            <div class="avatar"><img src="${message.author.profile_picture}" /></div>
             <div class="chat-message-content">
-                <a href="#" class="chat-message-author">${message.author.name}</a>
+                <a href="#" class="chat-message-author">${message.author.username}</a>
                 <span class="chat-message-date">${formatedTime}</span>
                 <div class="chat-message-message">
                         ${message.text} 
@@ -98,9 +98,9 @@ function scrollToBottom(){
                 const pUsername = participant.username;
                 if(pUsername !== username["0"].text){
                     if(participant.online === true){
-                        chatList.append(`<li><a href="#" class="user"><div class="avatar"><img src="/img/placeholder-avatar${randomNumber}.jpg" /></div>${pUsername}</a></li>`);
+                        chatList.append(`<li><a href="#" class="user"><div class="avatar"><img class="little_avatar"  src="${participant.image}" /></div>${pUsername}</a></li>`);
                     }else{
-                         chatList.append(`<li><a href="#"><div class="avatar"><img src="/img/placeholder-avatar${randomNumber}.jpg" /></div>${pUsername}</a></li>`);
+                         chatList.append(`<li><a href="#"><div class="avatar"><img class="little_avatar"  src="${participant.image}" /></div>${pUsername}</a></li>`);
                     }
                 }
             });
