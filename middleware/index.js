@@ -33,6 +33,24 @@ middleware.isChannelParticipant = (req, res, next)=>{
     });
 };
 
+middleware.isChannelCreator = (req, res, next)=>{
+    if(!ObjectID.isValid(req.params.id)){
+        return res.redirect("/");
+    }
+
+    Channel.findById(ObjectID(req.params.id)).then((rChannel)=>{
+        if(!rChannel){
+            return res.redirect("/");
+        }
+
+        if(rChannel.creator.equals(ObjectID(req.user._id))){
+            next();
+        }else{
+            return res.redirect("/");
+        }
+    });
+};
+
 // middleware.isItUserProfile = (req, res, next)=>{
 //     User.findById(req.params.id).then((rUser)=>{
 //         if(!rUser){
