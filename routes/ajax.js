@@ -6,13 +6,12 @@ const crypto = require("crypto");
 const middleware  = require("../middleware/index");
 const Channel     = require("../models/channel");
 const User = require("../models/user");
-const Message = require("../models/message");
 
 const router = express.Router();
 
 const upload = multer({
     storage: multer.diskStorage({
-        destination: path.join(__dirname, "../public/files/image/profile"),
+        destination: path.join(__dirname, "../public/files/image"),
         filename: (req, file, cb)=>{
             crypto.pseudoRandomBytes(4, (err, raw)=>{
                 const mimeType = mime.lookup(file.originalname);
@@ -49,9 +48,9 @@ router.get("/current/channel/:id", middleware.isLogedIn, middleware.isChannelPar
 router.post("/profile/img", middleware.isLogedIn, upload.single("file"), (req, res)=>{
     if(req.file){
         const file = {
-            path: "/files/image/profile/" + req.file.filename,
+            path: "/files/image/" + req.file.filename,
         };
-       User.findByIdAndUpdate(req.user._id, { profile_picture: "/files/image/profile/" + req.file.filename }).then(()=>{
+       User.findByIdAndUpdate(req.user._id, { profile_picture: "/files/image/" + req.file.filename }).then(()=>{
             res.send(file);
         });
     }else{
@@ -61,17 +60,19 @@ router.post("/profile/img", middleware.isLogedIn, upload.single("file"), (req, r
 
 
 // Set the channel picture
-router.post("/channel/:id/img", middleware.isLogedIn, middleware.isChannelCreator, upload.single("file"), (req, res)=>{
-    if(req.file){
-        const file = {
-            path: "/files/image/channel/" + req.file.filename,
-        };
-       Channel.findByIdAndUpdate(req.params.id, { channel_picture: file.path }).then(()=>{
-            res.send(file);
-       });
-    }else{
-        res.json({ error: true });
-    }
-}); 
+// router.post("/channel/:id/img", middleware.isLogedIn, upload.single("file"), (req, res)=>{
+//     console.log("hey");
+//     if(req.file){
+//         console.log(req.file);
+//         const file = {
+//             path: "/files/image/channel/" + req.file.filename,
+//         };
+//        Channel.findByIdAndUpdate(req.params.id, { channel_picture: file.path }).then(()=>{
+//             res.send(file);
+//        });
+//     }else{
+//         res.json({ error: true });
+//     }
+// });
 
 module.exports = router;

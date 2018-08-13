@@ -1,5 +1,5 @@
 node_modules/
 playground/
 
-public/files/image/profile/*
+public/files/image/*
 !public/files/image/profile/.gitkeep
