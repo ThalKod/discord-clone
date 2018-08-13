@@ -25,6 +25,10 @@ const channelSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    channel_picture: {
+        type: String,
+        default: "/img/placeholder.png",
+    },
 });
 
 module.exports = mongoose.model("Channel", channelSchema);
