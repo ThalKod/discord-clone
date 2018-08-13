@@ -52,7 +52,6 @@ router.post("/profile/img", middleware.isLogedIn, upload.single("file"), (req, r
             path: "/files/image/profile/" + req.file.filename,
         };
        User.findByIdAndUpdate(req.user._id, { profile_picture: "/files/image/profile/" + req.file.filename }).then(()=>{
-            // Temporary solution to handle the profile message change... profile picture should not be save in message 
             res.send(file);
         });
     }else{
@@ -62,8 +61,17 @@ router.post("/profile/img", middleware.isLogedIn, upload.single("file"), (req, r
 
 
 // Set the channel picture
-router.post("/channel/:id/img", middleware.isLogedIn, upload.single("file"), (req, res)=>{
-
-});
+router.post("/channel/:id/img", middleware.isLogedIn, middleware.isChannelCreator, upload.single("file"), (req, res)=>{
+    if(req.file){
+        const file = {
+            path: "/files/image/channel/" + req.file.filename,
+        };
+       Channel.findByIdAndUpdate(req.params.id, { channel_picture: file.path }).then(()=>{
+            res.send(file);
+       });
+    }else{
+        res.json({ error: true });
+    }
+}); 
 
 module.exports = router;
