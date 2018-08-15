@@ -1,15 +1,7 @@
 <% include partials/header %>
 
     <!-- Page Content -->
-    <div id="sidebar">
-        <ul class="sidebar-menu">
-            <li class="toggle-sidebar"><a href="#" data-toggle="sidebar"><i class="fas fa-users"></i></a></li>
-            <% channels.forEach(function(channel){ %>
-                <li><a href="/channel/<%= channel._id%>" class="current-server" data-toggle="tooltip" data-placement="right" data-title="<%=channel.channel_name%>"><img src="/img/placeholder-channel<%= Math.floor((Math.random() * 4) + 1) %>.jpg" alt=""></a></li>
-            <% }) %>
-            <li><a href="#" class="join-server" data-start="modal-custom" data-target="#create-group" data-toggle="tooltip" data-placement="right" data-title="Join a Group"><i class="fa fa-plus"></i></a></li>
-        </ul>
-    </div>
+    <% include partials/channel_section %>
 
     <div id="page">
         <div id="chat-list">
@@ -46,7 +38,7 @@
                                 <div class="groups-list scroll-hijack">
                                     <ul class="list">
                                         <% channels.forEach(function(channel){ %>
-                                            <li><a href="/channel/<%=channel._id%>" data-invite-link="https://minicord.herokuapp.com/channel/join/<%=channel._id%>"><div class="avatar"><img class="little_avatar" src="/img/placeholder-channel<%= Math.floor((Math.random() * 4) + 1) %>.jpg" /></div><%=channel.channel_name%></a></li>
+                                            <li><a href="/channel/<%=channel._id%>" data-invite-link="https://minicord.herokuapp.com/channel/join/<%=channel._id%>"><div class="avatar"><img class="little_avatar" src="<%= channel.channel_picture %>" /></div><%=channel.channel_name%></a></li>
                                         <%});%>
                                     </ul>
                                 </div>
