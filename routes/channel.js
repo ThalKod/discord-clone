@@ -1,13 +1,35 @@
 const   express     = require("express");
 const   { ObjectID } = require("mongodb");
 const   moment      = require("moment");
+const   multer      = require("multer");
+const   mime        = require("mime-types");
+const   path        = require("path");
+const   crypto      = require("crypto");
 const   User        = require("../models/user");
 const   middleware  = require("../middleware/index");
 const   Channel     = require("../models/channel");
 
 const       router = express.Router();
 
-router.post("/new", middleware.isLogedIn, (req, res)=>{
+const upload = multer({
+    storage: multer.diskStorage({
+        destination: path.join(__dirname, "../public/files/image"),
+        filename: (req, file, cb)=>{
+            crypto.pseudoRandomBytes(4, (err, raw)=>{
+                const mimeType = mime.lookup(file.originalname);
+                // throw away any extension if provided
+                const nameSplit = file.originalname.split(".").slice(0, -1);
+                // nameSplit.pop();
+
+                // replace all white spaces with - for safe file name on different filesystem
+                const name = nameSplit.join(".").replace(/\s/g, "-");
+                cb(null, raw.toString("hex") + name + "." + mime.extension(mimeType));
+            });
+        },
+    }),
+});
+
+router.post("/new", middleware.isLogedIn, upload.single("channel_picture"), (req, res)=>{
     if(!ObjectID.isValid(req.user._id)){
         return res.redirect("/");
     }
@@ -16,6 +38,14 @@ router.post("/new", middleware.isLogedIn, (req, res)=>{
         creator: req.user._id,
         channel_name: req.body.channel_name,
     };
+
+    if(req.file){
+        const file = {
+            path: "/files/image/" + req.file.filename,
+        };
+
+        channel.channel_picture = file.path;
+    }
 
     User.findById(req.user._id).then((rUser)=>{
         if(!rUser){

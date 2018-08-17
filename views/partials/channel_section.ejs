@@ -1,0 +1,9 @@
+<div id="sidebar">
+    <ul class="sidebar-menu">
+        <li class="toggle-sidebar"><a href="#" data-toggle="sidebar"><i class="fas fa-users"></i></a></li>
+        <% channels.forEach(function(channel){ %>
+            <li><a href="/channel/<%= channel._id%>" class="current-server" data-toggle="tooltip" data-placement="right" data-title="<%= channel.channel_name %>"><img src="<%= channel.channel_picture %>" alt=""></a></li>
+        <% }) %>
+        <li><a href="#" class="join-server" data-start="modal-custom" data-target="#create-group" data-toggle="tooltip" data-placement="right" data-title="Join a Group"><i class="fa fa-plus"></i></a></li>
+    </ul>
+</div>

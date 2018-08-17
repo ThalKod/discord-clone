@@ -1,5 +1,6 @@
 node_modules/
 playground/
 .DS_Store
-public/files/image/profile/*
+._*
+public/files/image/*
 !public/files/image/profile/.gitkeep

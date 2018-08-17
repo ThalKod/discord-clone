@@ -72,13 +72,13 @@
                 <div class="modal-block-content">
                     <span class="modal-close"><i class="fas fa-times"></i></span>
                     <h3>Create a new Channel</h3>
-                    <form class="form-horizontal" method="POST" action="/channel/new">
+                    <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="/channel/new">
                         <div class="form-group">
                             <p class="label mb-10">Choose a Channel photo (max size: 64x64)</p>
-                            <label for="group_photo" class="group-photo-placeholder avatar-placeholder" data-toggle="tooltip" data-title="Upload a channel photo" data-placement="bottom"><img src="/img/placeholder.png" /></label>
-                            <input id="group_photo" class="group-photo" type="file" />
+                            <label for="group_photo" class="group-photo-placeholder avatar-placeholder" data-toggle="tooltip" data-title="Upload a channel photo" data-placement="bottom"><img id="group_photo_img" src="/img/placeholder.png" /></label>
+                            <input id="group_photo" accept="image/*" name="channel_picture" class="group-photo" type="file" />
                         </div>
-                        <div class="form-group">
+                        <div class="form-group"> 
                             <label for="group_name">Group Name</label>
                             <input type="text" name="channel_name" id="group_name" class="form-control" />
                         </div>
