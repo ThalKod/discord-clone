@@ -1,4 +1,4 @@
-// /* eslint-disable */
+/* eslint-disable */
 
 // const init = function(){
 //     if(document.getElementById("group_photo")){
