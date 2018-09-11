@@ -119,16 +119,13 @@ router.get("/:id", middleware.isLogedIn, middleware.isChannelParticipant, (req, 
         return res.redirect("/");
     }
 
-    Channel.findById(ObjectID(req.params.id)).populate({ path: "message", populate: { path: "author" } }).populate("participant").then((rChannel)=>{
+    Channel.findById(ObjectID(req.params.id)).populate({ path: "message", populate: { path: "author" } }).populate("participant").limit(10).sort({date:-1}).then((rChannel)=>{
         if(!rChannel){
             return res.redirect("/");
         }
 
-        const renderedChanel = rChannel;
-        renderedChanel.message = renderedChanel.message.slice(renderedChanel.message.length - 10, renderedChanel.message.length);
-
         User.findById(req.user._id).populate("channels").then((rUser)=>{
-            res.render("chat", { channel: renderedChanel, channels: rUser.channels, title: renderedChanel.channel_name, moment });
+            res.render("chat", { channel: rChannel, channels: rUser.channels, title: renderedChanel.channel_name, moment });
         });
     })
     .catch((e)=>{

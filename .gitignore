@@ -3,4 +3,4 @@ playground/
 .DS_Store
 ._*
 public/files/image/*
-!public/files/image/profile/.gitkeep
+!public/files/image/.gitkeep
