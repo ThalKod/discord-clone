@@ -24,7 +24,7 @@
     "ejs": "^2.6.1",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.11",
     "method-override": "^3.0.0",
     "mime-types": "^2.1.20",
     "moment": "^2.22.2",
