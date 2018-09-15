@@ -55,12 +55,18 @@ router.get("/@me", middleware.isLogedIn, (req, res)=>{
 });
 
 // external user Profile
-
 router.get("/:id", middleware.isLogedIn, (req, res)=>{
-    User.findById(req.params.id).populate("channels").then((rUser)=>{
-        res.render("external_profile", { channels: rUser.channels, title: "username" });
-    }).catch((e)=>{
-        res.send(e);
+    User.findById(req.user._id).populate("channels").then((currentUser)=>{
+        User.findById(req.params.id).populate("channels").then((rUser)=>{
+            res.render("external_profile", {
+                 currentUserChannels: currentUser.channels,
+                 channels: rUser.channels,
+                 title: "username",
+                 user: rUser,
+                });
+        }).catch((e)=>{
+            res.send(e);
+        });
     });
 });
 
