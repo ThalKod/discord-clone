@@ -54,6 +54,22 @@ router.get("/@me", middleware.isLogedIn, (req, res)=>{
     });
 });
 
+// external user Profile
+router.get("/:id", middleware.isLogedIn, (req, res)=>{
+    User.findById(req.user._id).populate("channels").then((currentUser)=>{
+        User.findById(req.params.id).populate("channels").then((rUser)=>{
+            res.render("external_profile", {
+                 currentUserChannels: currentUser.channels,
+                 channels: rUser.channels,
+                 title: "username",
+                 user: rUser,
+                });
+        }).catch((e)=>{
+            res.send(e);
+        });
+    });
+});
+
 router.patch("/@me/update", middleware.isLogedIn, (req, res)=>{
     User.findByIdAndUpdate(req.user._id, req.body.user).then(()=>{
         res.redirect("/users/@me");
