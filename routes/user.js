@@ -1,8 +1,10 @@
 const express     = require("express");
 const passport    = require("passport");
+const { ObjectID } = require("mongodb");
 const User        = require("../models/user");
 const Message     = require("../models/message");
 const middleware  = require("../middleware/index");
+
 
 
 const     router = express.Router();
@@ -58,6 +60,9 @@ router.get("/@me", middleware.isLogedIn, (req, res)=>{
 router.get("/:id", middleware.isLogedIn, (req, res)=>{
     User.findById(req.user._id).populate("channels").then((currentUser)=>{
         User.findById(req.params.id).populate("channels").then((rUser)=>{
+            if(ObjectID(req.params.id).equals(ObjectID(req.user._id))){
+                res.redirect("@me");
+            }
             res.render("external_profile", {
                  currentUserChannels: currentUser.channels,
                  channels: rUser.channels,
