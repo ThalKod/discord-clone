@@ -7,7 +7,7 @@
 ![Profile MiniCord](https://github.com/ThalKod/discord-clone/blob/master/Profile_Screen.png)
 
 
-## Builted with
+## Built with
 
 * [Socket io](https://github.com/socketio/socket.io) - Realtime application framework
 * [Nodejs](https://github.com/nodejs/node) - Node.js JavaScript runtime
