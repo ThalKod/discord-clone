@@ -28,7 +28,7 @@
     "method-override": "^3.0.0",
     "mime-types": "^2.1.21",
     "moment": "^2.22.2",
-    "mongodb": "^3.1.8",
+    "mongodb": "^3.1.9",
     "mongoose": "^5.3.9",
     "multer": "^1.4.1",
     "passport": "^0.4.0",
