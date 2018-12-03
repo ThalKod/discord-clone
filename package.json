@@ -35,7 +35,7 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^5.0.1",
     "req-flash": "0.0.3",
-    "socket.io": "^2.1.1",
+    "socket.io": "^2.2.0",
     "string.prototype.startswith": "^0.2.0",
     "validator": "^10.9.0"
   },
