@@ -37,7 +37,7 @@
     "req-flash": "0.0.3",
     "socket.io": "^2.2.0",
     "string.prototype.startswith": "^0.2.0",
-    "validator": "^10.9.0"
+    "validator": "^10.10.0"
   },
   "devDependencies": {
     "eslint": "^5.10.0",
