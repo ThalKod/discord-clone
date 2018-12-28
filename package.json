@@ -4,7 +4,7 @@
   "description": "A \"Discord clone\" with Socket.io, Node.js & MongoDB...",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -26,24 +26,24 @@
     "lodash": "^4.17.11",
     "method-override": "^3.0.0",
     "mime-types": "^2.1.21",
-    "moment": "^2.22.2",
-    "mongodb": "^3.1.8",
-    "mongoose": "^5.3.7",
+    "moment": "^2.23.0",
+    "mongodb": "^3.1.10",
+    "mongoose": "^5.4.1",
     "multer": "^1.4.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^5.0.1",
     "req-flash": "0.0.3",
-    "socket.io": "^2.1.1",
+    "socket.io": "^2.2.0",
     "string.prototype.startswith": "^0.2.0",
-    "validator": "^10.8.0"
+    "validator": "^10.10.0"
   },
   "devDependencies": {
-    "eslint": "^5.8.0",
+    "eslint": "^5.11.1",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-plugin-import": "^2.13.0",
     "install": "^0.12.2",
-    "nodemon": "^1.18.5",
-    "npm": "^6.3.0"
+    "nodemon": "^1.18.9",
+    "npm": "^6.5.0"
   }
 }
