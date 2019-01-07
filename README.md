@@ -7,6 +7,26 @@
 ![Profile MiniCord](https://github.com/ThalKod/discord-clone/blob/master/Profile_Screen.png)
 
 
+# :floppy_disk: Installation
+
+```bash
+# clone the repo
+$ git https://github.com/ThalKod/discord-clone.git
+
+$ cd discord-clone
+
+# install the node modules...
+$ npm install
+
+# start
+$ npm start
+```
+Make sure you start mongodb or correct env var...
+```js
+config.dbURL = process.env.DATABASEURL || "mongodb://localhost/minicord";
+```
+
+
 ## Built with
 
 * [Socket io](https://github.com/socketio/socket.io) - Realtime application framework
