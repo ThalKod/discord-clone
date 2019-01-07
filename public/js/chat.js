@@ -10,7 +10,7 @@ socket.on("connect", function(){
             channelID,
             userID
         };
-    
+
 
     socket.emit("join", params, function(err){
         if(err){
@@ -20,18 +20,22 @@ socket.on("connect", function(){
             console.log("No Error");
         }
     });
-    
+
 });
 
 jQuery("#message-form").on("submit", function(e){
     e.preventDefault();
 
     var messageTextBox =  jQuery("[name=message]");
-    
+
+
+    var message = escapeHTML(messageTextBox.val().trim(), true);
+    if(message === "") return;
+
     var data = {
         userID,
         channelID : channelID,
-        message: messageTextBox.val()
+        message
     };
 
 
@@ -64,6 +68,22 @@ socket.on("disconnect", function(){
     console.log("Disconnected to server");
 });
 
+
+// Escape Html
+var ESC_MAP = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+};
+
+function escapeHTML(s, forAttribute) {
+    return s.replace(forAttribute ? /[&<>'"]/g : /[&<>]/g, function(c) {
+        return ESC_MAP[c];
+    });
+}
+
 // if User is looking at previous message we should not scroll down -- not yet implemented
 function scrollToBottom(){
     // // Selectors
@@ -93,7 +113,7 @@ function scrollToBottom(){
     $.get("/current/channel/"+ channelID )
         .done(function(data){
             chatList.html("");
-            data.forEach(function(participant){ 
+            data.forEach(function(participant){
                 const randomNumber = Math.floor((Math.random() * 7) + 1);
                 const pUsername = participant.username;
                 if(pUsername !== username["0"].text){
