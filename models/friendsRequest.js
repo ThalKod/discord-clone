@@ -2,11 +2,13 @@ const mongoose = require("mongoose");
 
 const friendsRequestSchema = new mongoose.Schema({
     requester: {
-        type: Number,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
         require: true,
     },
     recipient: {
-        type: Number,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
         require: true,
     },
     status: {

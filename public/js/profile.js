@@ -33,6 +33,16 @@ const init = function(){
             }
         });
     }
+
+    if(document.getElementById("addFriend")){
+        const sButton = document.getElementById("addFriend");
+        sButton.addEventListener("click", () => {
+            $.post("/users/friend/request/" + eUser)
+                .done((data) => {
+                    console.log(data);
+                })
+        });
+    }
 }
 
 document.addEventListener("DOMContentLoaded", init);

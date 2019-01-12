@@ -2,6 +2,7 @@ const express     = require("express");
 const passport    = require("passport");
 const { ObjectID } = require("mongodb");
 const User        = require("../models/user");
+const FriendRequest = require("../models/friendsRequest");
 const Message     = require("../models/message");
 const middleware  = require("../middleware/index");
 
@@ -45,6 +46,16 @@ router.get("/logout", middleware.isLogedIn, (req, res)=>{
     res.redirect("/");
 });
 
+router.post("/friend/request/:id", middleware.isLogedIn, (req, res)=>{
+    const newRequest = {
+        requester: req.user._id,
+        recipient: ObjectID(req.params.id),
+        status: 1,
+    };
+    FriendRequest.create(newRequest).then(()=>{
+        res.send({ error: false });
+    }).catch(e=>res.send({ error: true, msg: e }));
+});
 
 // Users Profile
 router.get("/@me", middleware.isLogedIn, (req, res)=>{
@@ -65,7 +76,7 @@ router.get("/:id", middleware.isLogedIn, (req, res)=>{
             res.render("external_profile", {
                  currentUserChannels: currentUser.channels,
                  channels: rUser.channels,
-                 title: "username",
+                 title: "eUsername",
                  user: rUser,
                 });
         }).catch((e)=>{

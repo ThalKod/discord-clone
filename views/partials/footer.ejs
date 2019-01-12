@@ -6,9 +6,12 @@
 
         <!-- Custom JS -->
         <script src="/socket.io/socket.io.js"></script>
-        <% if(title !== "Login" && title !== "Register" && title !== "username" && title !== "join"){ %>
+        <% if(title !== "Login" && title !== "Register" && title !== "username" && title !== "join" && title !== "eUsername"){ %>
             <script>var userID = "<%= currentUser._id %>";</script>
             <script>var channelID = "<%= channel._id %>";</script>
+        <% } %>
+        <% if(title === "eUsername"){ %>
+            <script>var eUser = "<%= user._id %>";</script>
         <% } %>
         <script src="/js/libs/dropzone.js"></script>
         <script src="/js/profile.js"></script>
