@@ -28,7 +28,7 @@
     "mime-types": "^2.1.21",
     "moment": "^2.23.0",
     "mongodb": "^3.1.10",
-    "mongoose": "^5.4.1",
+    "mongoose": "^5.4.3",
     "multer": "^1.4.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
