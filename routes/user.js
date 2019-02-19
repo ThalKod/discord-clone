@@ -4,7 +4,7 @@ const { ObjectID } = require("mongodb");
 const User        = require("../models/user");
 const Message     = require("../models/message");
 const middleware  = require("../middleware/index");
-const config         = require("./config/config");
+const config         = require("../config/config");
 
 const     router = express.Router();
 
