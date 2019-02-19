@@ -11,7 +11,7 @@
 
 ```bash
 # clone the repo
-$ git https://github.com/ThalKod/discord-clone.git
+$ git clone https://github.com/ThalKod/discord-clone.git
 
 $ cd discord-clone
 
