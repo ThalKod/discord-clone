@@ -36,7 +36,7 @@ mongoose.connect(config.dbURL, { reconnectTries: 5 })
     .then(()=>{
         // boot
         server.listen(config.port, ()=>{
-            console.log("listenning on " + config.port);
+            console.log("listening on " + config.port);
         });
     })
     .catch((dbErr)=>{
