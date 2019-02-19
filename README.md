@@ -30,7 +30,7 @@ config.dbURL = process.env.DATABASEURL || "mongodb://localhost/minicord";
 ```
 Make sure you set the domain 
 ```js
-config.domain = process.env.DOMAIN || minicord.mydomainname.com
+config.domain = process.env.DOMAIN || "localhost:500";
 ```
 
 
