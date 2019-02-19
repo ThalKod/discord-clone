@@ -7,7 +7,7 @@
         <div id="chat-list">
             <a href="/users/@me" class="user"><div class="avatar"><img src="<%= currentUser.profile_picture %>" /></div><%= currentUser.username %></a>
             <ul class="chat-list scroll-hijack">
-            
+
             </ul>
         </div>
         <div id="profile" class="page">
@@ -38,7 +38,7 @@
                                 <div class="groups-list scroll-hijack">
                                     <ul class="list">
                                         <% channels.forEach(function(channel){ %>
-                                            <li><a href="/channel/<%=channel._id%>" data-invite-link="https://minicord.herokuapp.com/channel/join/<%=channel._id%>"><div class="avatar"><img class="little_avatar" src="<%= channel.channel_picture %>" /></div><%=channel.channel_name%></a></li>
+                                            <li><a href="/channel/<%=channel._id%>" data-invite-link="https://minicord.<%=domain%>.com/channel/<%=channel._id%>"><div class="avatar"><img class="little_avatar" src="<%= channel.channel_picture %>" /></div><%=channel.channel_name%></a></li>
                                         <%});%>
                                     </ul>
                                 </div>

@@ -4,7 +4,7 @@ const { ObjectID } = require("mongodb");
 const User        = require("../models/user");
 const Message     = require("../models/message");
 const middleware  = require("../middleware/index");
-
+const config         = require("./config/config");
 
 const     router = express.Router();
 
@@ -49,7 +49,7 @@ router.get("/logout", middleware.isLogedIn, (req, res)=>{
 // Users Profile
 router.get("/@me", middleware.isLogedIn, (req, res)=>{
     User.findById(req.user._id).populate("channels").then((rUser)=>{
-        res.render("profile", { channels: rUser.channels, title: "username" });
+        res.render("profile", { channels: rUser.channels, title: "username", domain: config.domain});
     }).catch((e)=>{
         res.send(e);
     });
