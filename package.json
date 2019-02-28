@@ -25,7 +25,7 @@
     "express-session": "^1.15.6",
     "lodash": "^4.17.11",
     "method-override": "^3.0.0",
-    "mime-types": "^2.1.21",
+    "mime-types": "^2.1.22",
     "moment": "^2.24.0",
     "mongodb": "^3.1.13",
     "mongoose": "^5.4.16",
