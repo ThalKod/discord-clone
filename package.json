@@ -39,7 +39,7 @@
     "validator": "^10.11.0"
   },
   "devDependencies": {
-    "eslint": "^5.12.1",
+    "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-plugin-import": "^2.16.0",
     "install": "^0.12.2",
