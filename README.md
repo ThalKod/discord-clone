@@ -21,9 +21,16 @@ $ npm install
 # start
 $ npm start
 ```
-Make sure you start mongodb or correct env var...
+
+### Essential Configurations
+
+Make sure you start mongodb or correct env var
 ```js
 config.dbURL = process.env.DATABASEURL || "mongodb://localhost/minicord";
+```
+Make sure you set the domain 
+```js
+config.domain = process.env.DOMAIN || minicord.mydomainname.com
 ```
 
 
