@@ -1,6 +1,6 @@
 const express = require("express");
 const passport = require("passport");
-const config = require("./config/config");
+const config = require(".././config/config");
 const chalk = require("chalk")
 const {
     ObjectID
