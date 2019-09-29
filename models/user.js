@@ -1,11 +1,15 @@
 const   mongoose  = require("mongoose");
 const   validator = require("validator");
-// const   _         = require("lodash");
+// const _ = require("lodash");
 
  const userSchema = new mongoose.Schema({
     username: {
         type: String,
         unique: true,
+    },
+    admin: {
+        type: String,
+        default: "false"
     },
     email: {
         type: String,
@@ -43,6 +47,10 @@ const   validator = require("validator");
     },
     online: {
         type: Boolean,
+        default: false,
+    },
+    tag: {
+        type: String,
         default: false,
     },
 });

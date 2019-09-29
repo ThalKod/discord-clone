@@ -1,7 +1,1 @@
 node_modules/
-playground/
-.DS_Store
-._*
-public/files/image/*
-!public/files/image/.gitkeep
-.idea/

@@ -27,7 +27,7 @@ jQuery("#message-form").on("submit", function(e){
     e.preventDefault();
 
     var messageTextBox =  jQuery("[name=message]");
-
+    
 
     var message = escapeHTML(messageTextBox.val().trim(), true);
     if(message === "") return;

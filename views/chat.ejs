@@ -6,13 +6,12 @@
 
     <div id="page">
         <div id="chat-list">
-            <a href="/users/@me" class="user"><div class="avatar"><img src="<%= currentUser.profile_picture %>" /></div><%= currentUser.username %></a>
+            <a href="/users/@me" class="user"><div class="avatar"><img src="<%= currentUser.profile_picture %>" /></div><%= currentUser.username %><%= currentUser.tag %></a>
             <ul class="chat-list scroll-hijack">
                     <% channel.participant.forEach(function(participant){ %>
                         <%if(participant._id.equals(currentUser._id)){ %>
-
                         <% }else if(participant.online === true){ %>
-                            <li><a class="user"><div class="avatar"><img class="little_avatar"  src="<%= participant.profile_picture %>" /></div>hey<%= participant.username %></a></li>
+                            <li><a class="user"><div class="avatar"><img class="little_avatar"  src="<%= participant.profile_picture %>" /></div><%= participant.username %></a></li>
                         <% }else{ %>
                             <li><a><div class="avatar"><img class="little_avatar"  src="<%= participant.profile_picture %>" /></div><%= participant.username %></a></li>
                         <% } %>
@@ -23,7 +22,7 @@
             <div class="page-header clearfix">
                 <span><%= channel.channel_name %></span>
                 <ul>
-                    <!-- <li><a title="Online" href="#">Online - 1</a></li> -->
+                    <!-- <li><a title="Online" href="#">Online - ${rUser.online}</a></li> -->
                 </ul>
             </div>
             <div class="chat-body scroll-hijack">
@@ -31,7 +30,7 @@
                         <div class="chat-message">
                                 <div class="avatar"><img src="<%= message.author.profile_picture %>" /></div>
                                 <div class="chat-message-content">
-                                    <a href="/users/<%= message.author._id %>" class="chat-message-author"><%= message.author.username %></a>
+                                    <a href="/users/<%= message.author._id %>" class="chat-message-author"><%= message.author.username %><%= message.author.tag %></a>
                                     <span class="chat-message-date"><%= moment(message.created_at).format("lll")  %></span>
                                     <div class="chat-message-message">
                                             <%= message.text %>  
@@ -41,9 +40,9 @@
                     <% }); %>
             </div>
             <div class="chat-footer relative">
-                <form id="message-form" action="">
-                    <input name="message" type="text" class="post-input" placeholder="Your Text..." />
-                    <button type="submit" class="post-button"><span class="caret-right"></span></button>
+                <form autocomplete="off" id="message-form" action="">
+                    <input name="message" type="text" class="post-input" placeholder="Message #<%= channel.channel_name %>" />
+                    <button type="submit" data-toggle="tooltip" data-placement="left" data-title="Send Message" class="post-button"><span class="caret-right"></span></button>
                 </form>
             </div>
         </div>
