@@ -5,7 +5,7 @@ const   validator = require("validator");
  const userSchema = new mongoose.Schema({
     username: {
         type: String,
-        unique: true,
+        default: "Defualt User"
     },
     admin: {
         type: String,
@@ -50,8 +50,7 @@ const   validator = require("validator");
         default: false,
     },
     tag: {
-        type: String,
-        default: false,
+        type: String
     },
 });
 

@@ -39,14 +39,13 @@ router.post("/register", passport.authenticate("local-signup", {
     failureRedirect: "/users/register", // redirect back to the signup page if there is an error
     failureFlash: true,
 }), (req, res) => {
-    User.findById(req.user._id).then((rUser) => {
-        rUser.online = true;
-        rUser.tag = `#${Math.floor(1000 + Math.random() * 9000)}`;
-        rUser.admin = false;
-        rUser.username = `Default Name`;
-        rUser.save();
-    });
-    res.redirect("/users/@me");
+        User.findById(req.user._id).then((rUser) => {
+            rUser.online = true;
+            rUser.tag = `#${Math.floor(1000 + Math.random() * 9000)}`;
+            rUser.admin = false;
+            rUser.save();
+        });
+        res.redirect("/users/@me");
 });
 
 router.get("/logout", middleware.isLogedIn, (req, res) => {
