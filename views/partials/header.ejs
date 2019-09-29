@@ -10,7 +10,7 @@
     <meta name="author" content="Thal Marcelin">
 
     <title>MiniCord | <% if(title === "username"){ %>
-        <%= currentUser.username %>
+        <%= currentUser.username %><%= currentUser.tag %>
     <% }else if (title === "join"){ %>
         Join <%= channel.channel_name %>
     <% }else{ %>
@@ -32,11 +32,9 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 
 <body>
-
     <div id="bg">
         <div id="particles-js"></div>
     </div>
